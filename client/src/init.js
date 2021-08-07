@@ -22,10 +22,13 @@ k.loadSprite('door', 'assets/sprites/door.png');
 k.loadSprite('guy', 'assets/sprites/guy.png');
 k.loadSprite('key', 'assets/sprites/key.png');
 k.loadSprite('steel', 'assets/sprites/steel.png');
+
 k.loadSound('coin', 'assets/sounds/coin.ogg');
 k.loadSound('hit', 'assets/sounds/hit.ogg');
-k.loadSound('moan', 'assets/sounds/moan.wav');
-k.loadSound('ayy', 'assets/sounds/ayy.wav');
-k.loadSound('b', 'assets/sounds/b.wav');
+k.loadSound('ayy', 'assets/sounds/ayy.mp3');
+k.loadSound('mmm', 'assets/sounds/mmm.mp3');
+k.loadSound('haha', 'assets/sounds/haha.mp3');
+k.loadSound('aaa', 'assets/sounds/aaa.mp3');
+k.loadSound('priorities', 'assets/sounds/priorities.mp3');
 
 export default k;
