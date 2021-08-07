@@ -33,10 +33,10 @@ const main = (args = {}) => {
       '===============',
     ],
     [
-      '===============',
+      '=======F=======',
+      '=             =',
       '=             =',
       '=     !       =',
-      '=             =',
       '=             =',
       '=             =',
       '=             =',
@@ -67,13 +67,14 @@ const main = (args = {}) => {
       { msg: 'its a cloudy night...' },
     ],
     '|': [k.sprite('door'), k.solid(), 'door'],
+    F: [k.sprite('door'), k.solid(), 'finalDoor'],
     any(ch) {
       const char = characters[ch];
       if (char) {
         return [
           k.sprite(char.sprite),
           k.solid(),
-          'character',
+          char.sprite,
           {
             msg: char.msg,
           },
@@ -88,9 +89,21 @@ const main = (args = {}) => {
   let hasKey = false;
   let talking = null;
 
-  function talk(msg) {
-    talking = k.add([k.text(msg)]);
-  }
+  const talk = (msg) => {
+    talking = k.add([
+      k.text(msg),
+      k.pos(k.width() / 2, k.height() - 11),
+      k.origin('center'),
+    ]);
+  };
+
+  const cloudyTalk = (msg) => {
+    talking = k.add([
+      k.text(msg),
+      k.pos(k.width() / 2, 11),
+      k.origin('center'),
+    ]);
+  };
 
   player.overlaps('key', (key) => {
     k.play('coin');
@@ -111,14 +124,30 @@ const main = (args = {}) => {
     }
   });
 
-  player.overlaps('character', (ch) => {
-    k.play('b');
+  let finalDoor = false;
+
+  player.overlaps('finalDoor', () => {
+    if (finalDoor) {
+      k.go('win');
+    } else {
+      talk('did you talk to the cloudyman?');
+    }
+  });
+
+  player.overlaps('ch1', (ch) => {
+    k.play('aaa');
+    talk(ch.msg);
+  });
+
+  player.overlaps('ch2', (ch) => {
+    k.play('haha');
     talk(ch.msg);
   });
 
   player.overlaps('cloudyman', (ch) => {
     k.play('ayy');
-    talk(ch.msg);
+    cloudyTalk(ch.msg);
+    finalDoor = true;
   });
 
   const dirs = {
@@ -131,7 +160,7 @@ const main = (args = {}) => {
   const ifTalking = () => {
     if (talking) {
       k.destroy(talking);
-      // talking = null;
+      talking = null;
     }
   };
   const dirKeys = Object.keys(dirs);
