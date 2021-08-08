@@ -91,7 +91,7 @@ const main = (args = {}) => {
 
   const talk = (msg) => {
     talking = k.add([
-      k.text(msg),
+      k.text(msg, 7, { width: 140 }),
       k.pos(k.width() / 2, k.height() - 11),
       k.origin('center'),
     ]);
@@ -120,7 +120,7 @@ const main = (args = {}) => {
         k.go('win');
       }
     } else {
-      talk('you got no key!');
+      talk('wherz de key!');
     }
   });
 
@@ -163,6 +163,7 @@ const main = (args = {}) => {
       talking = null;
     }
   };
+
   const dirKeys = Object.keys(dirs);
   for (let i = 0; i < dirKeys.length; i += 1) {
     k.keyPress(dirKeys[i], ifTalking);
