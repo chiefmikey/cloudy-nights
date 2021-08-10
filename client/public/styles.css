@@ -58,13 +58,6 @@ button {
   align-items: center;
 }
 
-#background {
-  max-width: 100%;
-  max-height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
 #blackScreen,
 #game {
   width: auto;
@@ -95,6 +88,48 @@ button {
   transform: scale(1);
   animation: fadeIn 0.3s linear 1.5s forwards, fadeOut 3s linear 3s forwards;
   z-index: 3;
+}
+
+#background {
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#up,
+#right,
+#down,
+#left {
+  position: absolute;
+  width: 12%;
+  height: 9%;
+  z-index: 1;
+}
+
+#right,
+#left {
+  transform: rotate(90deg);
+}
+
+#up {
+  top: 54%;
+  left: 17.7%;
+}
+
+#right {
+  top: 62.3%;
+  left: 31.5%;
+}
+
+#down {
+  top: 70.5%;
+  left: 17.7%;
+}
+
+#left {
+  top: 62.3%;
+  left: 4%;
 }
 
 #zoom {
