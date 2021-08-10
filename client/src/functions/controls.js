@@ -25,48 +25,33 @@ const controls = () => {
   let isDown = false;
   let timer;
 
-  const playerMove = (dir) => {
-    return () => {
-      if (dir.length > 0) {
-        ifTalking();
-        isDown = true;
-        timer = setInterval(() => {
-          if (isDown) {
-            player.move(dirs[dir].scale(SPEED));
-          }
-        }, 15);
-      } else {
-        clearInterval(timer);
-        isDown = false;
-      }
-    };
+  const playerMove = (e) => {
+    if (e.type !== 'mouseup' && e.type !== 'touchend') {
+      ifTalking();
+      isDown = true;
+      timer = setInterval(() => {
+        if (isDown) {
+          player.move(dirs[e.target.id].scale(SPEED));
+        }
+      }, 15);
+    } else {
+      clearInterval(timer);
+      isDown = false;
+    }
+    e.preventDefault();
   };
 
-  document.getElementById('up').addEventListener('mousedown', playerMove('up'));
-  document
-    .getElementById('up')
-    .addEventListener('touchstart', playerMove('up'));
-  document
-    .getElementById('right')
-    .addEventListener('mousedown', playerMove('right'));
-  document
-    .getElementById('right')
-    .addEventListener('touchstart', playerMove('right'));
-  document
-    .getElementById('down')
-    .addEventListener('mousedown', playerMove('down'));
-  document
-    .getElementById('down')
-    .addEventListener('touchstart', playerMove('down'));
-  document
-    .getElementById('left')
-    .addEventListener('mousedown', playerMove('left'));
-  document
-    .getElementById('left')
-    .addEventListener('touchstart', playerMove('left'));
+  document.getElementById('up').addEventListener('mousedown', playerMove);
+  document.getElementById('up').addEventListener('touchstart', playerMove);
+  document.getElementById('right').addEventListener('mousedown', playerMove);
+  document.getElementById('right').addEventListener('touchstart', playerMove);
+  document.getElementById('down').addEventListener('mousedown', playerMove);
+  document.getElementById('down').addEventListener('touchstart', playerMove);
+  document.getElementById('left').addEventListener('mousedown', playerMove);
+  document.getElementById('left').addEventListener('touchstart', playerMove);
 
-  document.addEventListener('mouseup', playerMove(''));
-  document.addEventListener('touchend', playerMove(''));
+  document.addEventListener('mouseup', playerMove);
+  document.addEventListener('touchend', playerMove);
 };
 
 export default controls;
