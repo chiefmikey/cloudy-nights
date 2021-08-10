@@ -17,7 +17,7 @@ const playerOne = () => {
       K.play('hit');
       K.go('two');
     } else {
-      talk('wherz de key!');
+      talk('wherez dey key?');
     }
   });
 
@@ -27,7 +27,7 @@ const playerOne = () => {
     if (finalDoor) {
       K.go('win');
     } else {
-      talk('did you talk to the cloudyman?');
+      talk('did you talk to the Cloudyman?');
     }
   });
 
