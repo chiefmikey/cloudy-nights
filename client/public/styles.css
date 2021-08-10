@@ -60,12 +60,12 @@ button {
 #blackScreen,
 #game {
   width: auto;
-  height: 40%;
+  height: 47%;
   position: absolute;
-  top: 6%;
+  top: 3%;
   border-radius: 5%;
   background-color: black;
-  z-index: 4;
+  z-index: -1;
 }
 
 #blackScreen {
