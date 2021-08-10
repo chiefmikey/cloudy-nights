@@ -11,6 +11,11 @@ body {
 }
 
 img {
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   pointer-events: none;
 }
 
@@ -30,7 +35,7 @@ button {
   background-color: black;
   animation: fadeOut 1s linear 0s forwards;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 #app {
@@ -55,6 +60,8 @@ button {
 #background {
   max-width: 100%;
   max-height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 #blackScreen,
@@ -65,17 +72,16 @@ button {
   top: 3%;
   border-radius: 5%;
   background-color: black;
-  z-index: -1;
 }
 
 #blackScreen {
   min-width: 68%;
   animation: fadeOut 2s linear 3s forwards;
-  pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 
 #title {
@@ -87,7 +93,7 @@ button {
   top: 44%;
   transform: scale(1);
   animation: fadeIn 0.3s linear 1.5s forwards, fadeOut 3s linear 3s forwards;
-  z-index: 2;
+  z-index: 3;
 }
 
 #zoom {
