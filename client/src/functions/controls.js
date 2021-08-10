@@ -14,7 +14,6 @@ const controls = () => {
   };
 
   const dirKeys = Object.keys(dirs);
-
   const player = playerOne();
 
   for (let i = 0; i < dirKeys.length; i += 1) {
