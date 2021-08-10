@@ -26,14 +26,25 @@ if (document.addEventListener) {
   document.addEventListener(
     'contextmenu',
     function (e) {
-      zoom();
+      console.log();
+      if (
+        window.getComputedStyle(document.getElementById('zoom')).visibility ===
+        'visible'
+      ) {
+        zoom();
+      }
       e.preventDefault();
     },
     false,
   );
 } else {
   document.attachEvent('oncontextmenu', function () {
-    zoom();
+    if (
+      window.getComputedStyle(document.getElementById('zoom')).visibility ===
+      'visible'
+    ) {
+      zoom();
+    }
     window.event.returnValue = false;
   });
 }
