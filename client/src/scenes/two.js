@@ -1,7 +1,9 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import K from '../functions/init.js';
 import characters from '../content/characters.js';
+import controls from '../functions/controls.js';
 
-const two = (controls) => {
+const two = () => {
   const level = [
     '=======F=======',
     '=             =',
