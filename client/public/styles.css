@@ -9,9 +9,13 @@ body,
 img,
 h1,
 #up,
+#topRight,
 #right,
+#bottomRight,
 #down,
-#left {
+#bottomLeft,
+#left,
+#topLeft {
   -khtml-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
@@ -114,9 +118,9 @@ button {
 #down,
 #left {
   position: absolute;
-  width: 12%;
-  height: 9%;
-  z-index: 4;
+  width: 15%;
+  height: 10%;
+  z-index: 5;
 }
 
 #right,
@@ -124,24 +128,54 @@ button {
   transform: rotate(90deg);
 }
 
+#topRight,
+#bottomRight,
+#bottomLeft,
+#topLeft {
+  position: absolute;
+  width: 14.7%;
+  height: 9%;
+  z-index: 4;
+}
+
 #up {
-  top: 54%;
-  left: 17.7%;
+  top: 53.6%;
+  left: 16.3%;
+}
+
+#topRight {
+  top: 54.3%;
+  left: 29.7%;
 }
 
 #right {
-  top: 62.3%;
-  left: 31.5%;
+  top: 61.8%;
+  left: 31%;
+}
+
+#bottomRight {
+  top: 70.3%;
+  left: 29.7%;
 }
 
 #down {
-  top: 70.5%;
-  left: 17.7%;
+  top: 70%;
+  left: 16.3%;
+}
+
+#bottomLeft {
+  top: 70.3%;
+  left: 3%;
 }
 
 #left {
-  top: 62.3%;
-  left: 4%;
+  top: 61.8%;
+  left: 1.5%;
+}
+
+#topLeft {
+  top: 54.3%;
+  left: 3%;
 }
 
 #zoom {
@@ -157,7 +191,7 @@ button {
   border-radius: 10px;
   padding: 10px 20px 20px 10px;
   visibility: hidden;
-  z-index: 5;
+  z-index: 6;
 }
 
 @media (min-width: 400px), (min-height: 960px) {
