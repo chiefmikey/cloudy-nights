@@ -1,6 +1,6 @@
 let isZoomed = false;
 
-document.getElementById('zoom').addEventListener('click', function () {
+const zoom = () => {
   if (!isZoomed) {
     document.getElementById('body').style.justifyContent = 'flex-start';
     document.getElementById('app').style.justifyContent = 'flex-start';
@@ -18,4 +18,22 @@ document.getElementById('zoom').addEventListener('click', function () {
     document.getElementById('background').style.maxWidth = '100%';
     isZoomed = false;
   }
-});
+};
+
+document.getElementById('zoom').addEventListener('click', zoom);
+
+if (document.addEventListener) {
+  document.addEventListener(
+    'contextmenu',
+    function (e) {
+      zoom();
+      e.preventDefault();
+    },
+    false,
+  );
+} else {
+  document.attachEvent('oncontextmenu', function () {
+    zoom();
+    window.event.returnValue = false;
+  });
+}
