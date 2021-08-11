@@ -9,7 +9,8 @@ let direction;
 let timer;
 
 const playerMove = (e) => {
-  direction = e.target.id;
+  e.preventDefault();
+  e.returnValue = false;
   if (
     e.type !== 'mouseup' &&
     e.type !== 'touchend' &&
@@ -21,26 +22,32 @@ const playerMove = (e) => {
       e.target.id === 'down' ||
       e.target.id === 'bottomLeft' ||
       e.target.id === 'left' ||
-      e.target.id === 'topLeft') &&
-    (e.buttons === 1 || e.buttons === 3)
+      e.target.id === 'topLeft')
   ) {
-    clearInterval(timer);
-    isDown = true;
-    getMoving();
+    if (
+      e.buttons === 1 ||
+      e.buttons === 3 ||
+      e.type === 'touchstart' ||
+      e.type === 'touchmove'
+    ) {
+      clearInterval(timer);
+      isDown = true;
+      direction = e.target.id;
+      getMoving();
+    }
   } else {
     clearInterval(timer);
     isDown = false;
   }
-  e.preventDefault();
 };
 
 document.addEventListener('mousedown', playerMove);
 document.addEventListener('mouseup', playerMove);
 document.addEventListener('mouseover', playerMove);
-document.addEventListener('touchstart', playerMove);
-document.addEventListener('touchend', playerMove);
-document.addEventListener('touchmove', playerMove);
-document.addEventListener('touchcancel', playerMove);
+document.addEventListener('touchstart', playerMove, false);
+document.addEventListener('touchend', playerMove, false);
+document.addEventListener('touchmove', playerMove, false);
+document.addEventListener('touchcancel', playerMove, false);
 
 const controls = () => {
   const player = playerOne();
