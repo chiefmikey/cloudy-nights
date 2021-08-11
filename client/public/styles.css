@@ -4,8 +4,7 @@ body {
   overflow-y: hidden;
 }
 
-html,
-body,
+canvas,
 img,
 h1,
 #up,
@@ -52,6 +51,8 @@ button {
   background-color: black;
   animation: fadeOut 1s linear 0s forwards;
   pointer-events: none;
+  touch-action: none;
+  user-select: none;
   z-index: 2;
 }
 
@@ -92,6 +93,8 @@ button {
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  touch-action: none;
+  user-select: none;
 }
 
 #title {
@@ -110,6 +113,8 @@ button {
   max-width: 100%;
   max-height: 100%;
   pointer-events: none;
+  touch-action: none;
+  user-select: none;
   z-index: 1;
 }
 
