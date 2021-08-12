@@ -1,5 +1,5 @@
 FROM node:latest
-EXPOSE 8080
+EXPOSE 3002
 WORKDIR /cloudyman
 COPY . .
 COPY init.sh /bin
