@@ -4,9 +4,12 @@ body {
   overflow-y: hidden;
 }
 
+html,
+body,
 canvas,
 img,
 h1,
+#title,
 #up,
 #right,
 #down,
@@ -17,17 +20,6 @@ h1,
   -webkit-user-select: none;
   user-select: none;
 }
-
-/* #topLeft,
-#topRight,
-#bottomRight,
-#bottomLeft {
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-} */
 
 body {
   position: relative;
@@ -85,21 +77,19 @@ button {
 #blackScreen,
 #game {
   width: auto;
-  height: 47%;
+  height: 49%;
   position: absolute;
-  top: 3%;
+  top: 2%;
   border-radius: 5%;
   background-color: black;
 }
 
 #blackScreen {
   min-width: 68%;
-  animation: fadeOut 2s linear 3s forwards;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  pointer-events: none;
   touch-action: none;
   user-select: none;
 }
@@ -112,8 +102,10 @@ button {
   opacity: 0%;
   top: 44%;
   transform: scale(1);
-  animation: fadeIn 0.3s linear 1.5s forwards, fadeOut 3s linear 3s forwards;
+  animation: fadeIn 0.3s linear 1.5s forwards;
   z-index: 3;
+  touch-action: none;
+  user-select: none;
 }
 
 #background {
@@ -123,6 +115,10 @@ button {
   touch-action: none;
   user-select: none;
   z-index: 1;
+}
+
+#controls {
+  pointer-events: none;
 }
 
 #up,
@@ -139,36 +135,6 @@ button {
 #left {
   transform: rotate(90deg);
 }
-
-/* #topRight,
-#bottomRight,
-#bottomLeft,
-#topLeft {
-  position: absolute;
-  width: 14.7%;
-  height: 9%;
-  z-index: 4;
-} */
-
-/* #topRight {
-  top: 54.3%;
-  left: 29.7%;
-}
-
-#bottomRight {
-  top: 70.3%;
-  left: 29.7%;
-}
-
-#bottomLeft {
-  top: 70.3%;
-  left: 3%;
-}
-
-#topLeft {
-  top: 54.3%;
-  left: 3%;
-} */
 
 #up {
   top: 53.6%;
