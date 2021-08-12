@@ -1,7 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import K from '../functions/init.js';
 import characters from '../content/characters.js';
-import controls from '../functions/controls.js';
 
 const one = () => {
   const level = [
@@ -45,7 +44,6 @@ const one = () => {
       return undefined;
     },
   });
-  controls();
 };
 
 export default one;
