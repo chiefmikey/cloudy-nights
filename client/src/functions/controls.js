@@ -7,47 +7,7 @@ let getMoving = () => {};
 let isDown = false;
 let direction;
 let timer;
-
-const playerMove = (e) => {
-  e.preventDefault();
-  e.returnValue = false;
-  if (
-    e.type !== 'mouseup' &&
-    e.type !== 'touchend' &&
-    e.type !== 'touchcancel' &&
-    (e.target.id === 'up' ||
-      e.target.id === 'topRight' ||
-      e.target.id === 'right' ||
-      e.target.id === 'bottomRight' ||
-      e.target.id === 'down' ||
-      e.target.id === 'bottomLeft' ||
-      e.target.id === 'left' ||
-      e.target.id === 'topLeft')
-  ) {
-    if (
-      e.buttons === 1 ||
-      e.buttons === 3 ||
-      e.type === 'touchstart' ||
-      e.type === 'touchmove'
-    ) {
-      clearInterval(timer);
-      isDown = true;
-      direction = e.target.id;
-      getMoving();
-    }
-  } else {
-    clearInterval(timer);
-    isDown = false;
-  }
-};
-
-document.addEventListener('mousedown', playerMove);
-document.addEventListener('mouseup', playerMove);
-document.addEventListener('mouseover', playerMove);
-document.addEventListener('touchstart', playerMove, false);
-document.addEventListener('touchend', playerMove, false);
-document.addEventListener('touchmove', playerMove, false);
-document.addEventListener('touchcancel', playerMove, false);
+let sound = false;
 
 const controls = () => {
   const player = playerOne();
@@ -72,24 +32,66 @@ const controls = () => {
     ifTalking();
     timer = setInterval(() => {
       if (isDown) {
-        if (direction === 'topRight') {
-          player.move(dirs.right.scale(SPEED));
-          player.move(dirs.up.scale(SPEED));
-        } else if (direction === 'bottomRight') {
-          player.move(dirs.right.scale(SPEED));
-          player.move(dirs.down.scale(SPEED));
-        } else if (direction === 'bottomLeft') {
-          player.move(dirs.left.scale(SPEED));
-          setTimeout(() => player.move(dirs.down.scale(SPEED)), 0);
-        } else if (direction === 'topLeft') {
-          player.move(dirs.left.scale(SPEED));
-          setTimeout(() => player.move(dirs.up.scale(SPEED)), 0);
-        } else {
-          player.move(dirs[direction].scale(SPEED));
-        }
+        player.move(dirs[direction].scale(SPEED));
       }
     }, 15);
   };
 };
+
+const playerMove = (e) => {
+  e.preventDefault();
+  e.returnValue = false;
+  if (
+    e.type !== 'mouseup' &&
+    e.type !== 'touchend' &&
+    e.type !== 'touchcancel' &&
+    (e.target.id === 'up' ||
+      e.target.id === 'right' ||
+      e.target.id === 'down' ||
+      e.target.id === 'left')
+  ) {
+    if (
+      e.buttons === 1 ||
+      e.buttons === 3 ||
+      e.type === 'touchstart' ||
+      e.type === 'touchmove'
+    ) {
+      clearInterval(timer);
+      isDown = true;
+      direction = e.target.id;
+      getMoving();
+    }
+  } else {
+    clearInterval(timer);
+    isDown = false;
+  }
+};
+
+const blackScreen = document.getElementById('blackScreen');
+const title = document.getElementById('title');
+
+const touchStart = () => {
+  if (!sound && getComputedStyle(title).opacity === '1') {
+    K.play('coin');
+    sound = true;
+    document.getElementById('controls').style.pointerEvents = 'all';
+    blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
+    title.style.animation = 'fadeOut .2s linear 0s forwards';
+    controls();
+  }
+};
+
+blackScreen.addEventListener('mousedown', touchStart);
+blackScreen.addEventListener('touchstart', touchStart);
+title.addEventListener('mousedown', touchStart);
+title.addEventListener('touchstart', touchStart);
+
+document.addEventListener('mousedown', playerMove);
+document.addEventListener('mouseup', playerMove);
+document.addEventListener('mouseover', playerMove);
+document.addEventListener('touchstart', playerMove, false);
+document.addEventListener('touchend', playerMove, false);
+document.addEventListener('touchmove', playerMove, false);
+document.addEventListener('touchcancel', playerMove, false);
 
 export default controls;
