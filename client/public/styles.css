@@ -8,19 +8,26 @@ canvas,
 img,
 h1,
 #up,
-#topRight,
 #right,
-#bottomRight,
 #down,
-#bottomLeft,
-#left,
-#topLeft {
+#left, {
   -khtml-user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* #topLeft,
+#topRight,
+#bottomRight,
+#bottomLeft {
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+} */
 
 body {
   position: relative;
@@ -133,7 +140,7 @@ button {
   transform: rotate(90deg);
 }
 
-#topRight,
+/* #topRight,
 #bottomRight,
 #bottomLeft,
 #topLeft {
@@ -141,21 +148,11 @@ button {
   width: 14.7%;
   height: 9%;
   z-index: 4;
-}
+} */
 
-#up {
-  top: 53.6%;
-  left: 16.3%;
-}
-
-#topRight {
+/* #topRight {
   top: 54.3%;
   left: 29.7%;
-}
-
-#right {
-  top: 61.8%;
-  left: 31%;
 }
 
 #bottomRight {
@@ -163,24 +160,34 @@ button {
   left: 29.7%;
 }
 
-#down {
-  top: 70%;
-  left: 16.3%;
-}
-
 #bottomLeft {
   top: 70.3%;
   left: 3%;
 }
 
-#left {
-  top: 61.8%;
-  left: 1.5%;
-}
-
 #topLeft {
   top: 54.3%;
   left: 3%;
+} */
+
+#up {
+  top: 53.6%;
+  left: 16.3%;
+}
+
+#right {
+  top: 61.8%;
+  left: 31%;
+}
+
+#down {
+  top: 70%;
+  left: 16.3%;
+}
+
+#left {
+  top: 61.8%;
+  left: 1.5%;
 }
 
 #zoom {
