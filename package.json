@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://chiefmikey@github.com/chiefmikey/cloudyman.git"
+    "url": "git+https://github.com/chiefmikey/cloudyman.git"
   },
   "license": "ISC",
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
@@ -48,7 +48,6 @@
     "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-compat": "^3.11.1",
