@@ -23,7 +23,6 @@
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
-    "@mikey-pro/style-guide": "^1.4.9",
     "babel-loader": "^8.2.2",
     "babel-preset-airbnb": "^5.0.0",
     "css-loader": "^6.2.0",
@@ -51,12 +50,5 @@
   "contributors": [
     "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
   ],
-  "type": "module",
-  "prettier": "@mikey-pro/prettier-config",
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config"
-  },
-  "stylelint": {
-    "extends": "@mikey-pro/stylelint-config"
-  }
+  "type": "module"
 }
