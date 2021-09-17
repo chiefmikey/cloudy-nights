@@ -5,8 +5,6 @@ const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf('/'));
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/public/dist');
 
-const css = 'css-loader';
-
 export default {
   mode: 'development',
   entry: `${SRC_DIR}/index.js`,
@@ -35,19 +33,11 @@ export default {
       },
       {
         test: /\.css$/,
-        use: [css],
-      },
-      {
-        test: /\.scss$/,
-        use: [css, 'sass-loader'],
-      },
-      {
-        test: /\.sass$/,
-        use: [css, 'sass-loader'],
+        loader: 'css-loader',
       },
       {
         test: /\.(png|ttf|jp(e*)g|svg)$/,
-        use: 'url-loader?limit=100000&name=img/[name].[ext]',
+        loader: 'url-loader?limit=100000&name=img/[name].[ext]',
       },
     ],
   },
