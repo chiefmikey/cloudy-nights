@@ -2,8 +2,22 @@ import { bodySize } from '../elements/body.js';
 import { tommyman, move, spinLeft, spinRight } from '../elements/tommyman.js';
 import addInterval from '../helpers/interval.js';
 
-let left = bodySize.width / 2;
-let bottom = bodySize.height / 2;
+const cool = new Audio('../assets/sounds/cool.mp3');
+const crazy = new Audio('../assets/sounds/crazy.mp3');
+crazy.volume = 0.9;
+const d = new Audio('../assets/sounds/d.mp3');
+d.volume = 0.5;
+const ea = new Audio('../assets/sounds/ea.mp3');
+const g = new Audio('../assets/sounds/g.mp3');
+g.volume = 0.8;
+const gnarly = new Audio('../assets/sounds/gnarly.mp3');
+gnarly.volume = 0.8;
+
+const allWords = [cool, crazy, gnarly];
+const allNoises = [d, ea, g];
+
+let left = bodySize.width / 2 - 100;
+let bottom = bodySize.height / 2 - 100;
 
 tommyman.style.left = `${left}px`;
 tommyman.style.bottom = `${bottom}px`;
@@ -127,19 +141,25 @@ const aDown = () => {
 };
 
 const hitsWall = () => {
+  const randomNoise =
+    allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
+    randomNoise.play();
     addInterval(aRight()());
     return true;
   }
   if (left >= bodySize.width - 200) {
+    randomNoise.play();
     addInterval(aLeft()());
     return true;
   }
   if (bottom <= 0) {
+    randomNoise.play();
     addInterval(aUp()());
     return true;
   }
   if (bottom >= bodySize.height - 200) {
+    randomNoise.play();
     addInterval(aDown()());
     return true;
   }
@@ -147,6 +167,9 @@ const hitsWall = () => {
 };
 
 tommyman.addEventListener('mouseover', (event) => {
+  const randomWord =
+    allWords[((allWords.length - 1) * Math.random()).toFixed()];
+  randomWord.play();
   const dirKeys = Object.keys(allDirections);
   addInterval(allDirections[random(dirKeys)]());
 });

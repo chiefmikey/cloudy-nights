@@ -3,7 +3,7 @@ import path from 'path';
 const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf('/'));
 
 const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '../client/public/dist');
+const DIST_DIR = path.join(__dirname, '/client/public/dist');
 
 export default {
   mode: 'development',

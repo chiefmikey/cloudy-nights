@@ -19,7 +19,6 @@ const addInterval = (interval) => {
     for (let i = 0; i < 6; i += 1) {
       build += colorChar[((colorChar.length - 1) * Math.random()).toFixed()];
     }
-    console.log(build);
     return build;
   };
   body.style.backgroundColor = `#${hash()}`;
