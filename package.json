@@ -34,6 +34,7 @@
     "cloudy",
     "nights"
   ],
+  "type": "module",
   "prettier": "@mikey-pro/prettier-config",
   "eslintConfig": {
     "extends": "@mikey-pro/eslint-config"
