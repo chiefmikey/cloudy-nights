@@ -23,7 +23,7 @@ app
 // .use(submitRouter.allowedMethods());
 
 app.listen(3003, () =>
-  console.log(`Koa is listening to http://localhost:3002`),
+  console.log(`Koa is listening to http://localhost:3003`),
 );
 
 export default app;
