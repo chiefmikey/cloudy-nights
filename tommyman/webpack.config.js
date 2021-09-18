@@ -3,13 +3,13 @@ import path from 'path';
 const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf('/'));
 
 const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/public/dist');
+const DIST_DIR = path.join(__dirname, '../client/public/dist');
 
 export default {
   mode: 'development',
   entry: `${SRC_DIR}/index.js`,
   output: {
-    filename: 'bundle.js',
+    filename: 'tommyman-bundle.js',
     path: DIST_DIR,
   },
   module: {
@@ -37,7 +37,12 @@ export default {
       },
       {
         test: /\.(png|ttf|jp(e*)g|svg)$/,
-        loader: 'url-loader?limit=100000&name=img/[name].[ext]',
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: '100000&name=img/[name].[ext]' },
+          },
+        ],
       },
     ],
   },

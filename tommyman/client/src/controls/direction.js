@@ -1,0 +1,152 @@
+import { bodySize } from '../elements/body.js';
+import { tommyman, move, spinLeft, spinRight } from '../elements/tommyman.js';
+import addInterval from '../helpers/interval.js';
+
+let left = bodySize.width / 2;
+let bottom = bodySize.height / 2;
+
+tommyman.style.left = `${left}px`;
+tommyman.style.bottom = `${bottom}px`;
+
+const random = (keys) => keys[((keys.length - 1) * Math.random()).toFixed()];
+
+const goLeft = () => {
+  return () =>
+    setInterval(() => {
+      left -= 1;
+      if (!hitsWall()) {
+        spinLeft();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goLeftUp = () => {
+  return () =>
+    setInterval(() => {
+      left -= 1;
+      bottom += 1;
+      if (!hitsWall()) {
+        spinLeft();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goLeftDown = () => {
+  return () =>
+    setInterval(() => {
+      left -= 1;
+      bottom -= 1;
+      if (!hitsWall()) {
+        spinLeft();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goRight = () => {
+  return () =>
+    setInterval(() => {
+      left += 1;
+      if (!hitsWall()) {
+        spinRight();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goRightUp = () => {
+  return () =>
+    setInterval(() => {
+      left += 1;
+      bottom += 1;
+      if (!hitsWall()) {
+        spinRight();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goRightDown = () => {
+  return () =>
+    setInterval(() => {
+      left += 1;
+      bottom -= 1;
+      if (!hitsWall()) {
+        spinRight();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goUp = () => {
+  return () =>
+    setInterval(() => {
+      bottom += 1;
+      if (!hitsWall()) {
+        spinLeft();
+        move(left, bottom);
+      }
+    }, 1);
+};
+const goDown = () => {
+  return () =>
+    setInterval(() => {
+      bottom -= 1;
+      if (!hitsWall()) {
+        spinRight();
+        move(left, bottom);
+      }
+    }, 1);
+};
+
+const allDirections = {
+  left: goLeft,
+  right: goRight,
+  up: goUp,
+  down: goDown,
+  leftUp: goLeftUp,
+  rightUp: goRightUp,
+  leftDown: goLeftDown,
+  rightDown: goRightDown,
+};
+
+const aRight = () => {
+  const allRights = [goRight, goRightUp, goRightDown];
+  return random(allRights);
+};
+
+const aLeft = () => {
+  const allLefts = [goLeft, goLeftUp, goLeftDown];
+  return random(allLefts);
+};
+
+const aUp = () => {
+  const allUps = [goUp, goLeftUp, goRightUp];
+  return random(allUps);
+};
+
+const aDown = () => {
+  const allDowns = [goDown, goLeftDown, goRightDown];
+  return random(allDowns);
+};
+
+const hitsWall = () => {
+  if (left <= 0) {
+    addInterval(aRight()());
+    return true;
+  }
+  if (left >= bodySize.width - 200) {
+    addInterval(aLeft()());
+    return true;
+  }
+  if (bottom <= 0) {
+    addInterval(aUp()());
+    return true;
+  }
+  if (bottom >= bodySize.height - 200) {
+    addInterval(aDown()());
+    return true;
+  }
+  return false;
+};
+
+tommyman.addEventListener('mouseover', (event) => {
+  const dirKeys = Object.keys(allDirections);
+  addInterval(allDirections[random(dirKeys)]());
+});
