@@ -39,6 +39,7 @@ const increaseSpeed = (event) => {
 };
 
 const decreaseSpeed = (event) => {
+  event.preventDefault();
   slowDown();
 };
 
