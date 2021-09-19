@@ -5,7 +5,9 @@ export const speedUp = () => {
 };
 
 export const slowDown = () => {
-  if (speed > 1) {
+  if (speed > 2) {
+    speed -= 2;
+  } else if (speed > 1) {
     speed -= 1;
   }
 };

@@ -1,5 +1,6 @@
-import { bodySize } from '../elements/body.js';
+import { body, bodySize } from '../elements/body.js';
 import { tommyman, move, spinLeft, spinRight } from '../elements/tommyman.js';
+import { speedUp, slowDown } from './speed.js';
 import addInterval from '../helpers/interval.js';
 
 const cool = new Audio('../assets/sounds/cool.mp3');
@@ -150,26 +151,26 @@ const hitsWall = () => {
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
     randomNoise.play();
-    console.log(randomNoise);
     addInterval(aRight()());
+    slowDown();
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
-    console.log(randomNoise);
     addInterval(aLeft()());
+    slowDown();
     return true;
   }
   if (bottom <= 0) {
     randomNoise.play();
-    console.log(randomNoise);
     addInterval(aUp()());
+    slowDown();
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
-    console.log(randomNoise);
     addInterval(aDown()());
+    slowDown();
     return true;
   }
   return false;
@@ -177,36 +178,84 @@ const hitsWall = () => {
 
 const beginning = new Audio('../assets/sounds/beginning.mp3');
 beginning.volume = 0.9;
-let first = true;
 
+let first = true;
 let touching = false;
+let triggered = true;
 
 const touchEnd = (event) => {
   touching = false;
+  triggered = false;
+};
+
+const randomBounce = (event) => {
+  const randomWord =
+    allWords[((allWords.length - 1) * Math.random()).toFixed()];
+  console.log(first, touching, triggered);
+  if (!first && (!touching || (touching && !triggered))) {
+    randomWord.play();
+  }
+  const dirKeys = Object.keys(allDirections);
+  addInterval(allDirections[random(dirKeys)]());
+  speedUp();
 };
 
 const firstClick = (event) => {
   if (first) {
     beginning.play();
-    first = false;
-    tommyman.addEventListener('mouseover', randomBounce);
+    tommyman.addEventListener('mousemove', mouseMove);
     tommyman.addEventListener('touchstart', randomBounce);
-    tommyman.addEventListener('touchmove', randomBounce);
     tommyman.addEventListener('touchend', touchEnd);
     tommyman.addEventListener('mouseout', touchEnd);
+    tommyman.addEventListener('touchmove', touchMove);
+    body.addEventListener('touchmove', touchMove);
+    body.addEventListener('touchend', touchEnd);
+    first = false;
   }
   touching = true;
   randomBounce();
 };
 
-const randomBounce = (event) => {
-  if (!touching) {
-    const randomWord =
-      allWords[((allWords.length - 1) * Math.random()).toFixed()];
-    randomWord.play();
+const getOffset = (el) => {
+  const rect = el.getBoundingClientRect();
+  return {
+    leftSide: rect.left + window.scrollX,
+    rightSide: rect.right + window.scrollX,
+    topSide: rect.top + window.scrollY,
+    bottomSide: rect.bottom + window.scrollY,
+  };
+};
+
+const isOverlapping = (x, y) => {
+  const area = getOffset(tommyman);
+  if (
+    x >= area.leftSide + tommySize.width / 6 &&
+    x <= area.rightSide - tommySize.width / 6 &&
+    y >= area.topSide + tommySize.height / 6 &&
+    y <= area.bottomSide - tommySize.height / 6
+  ) {
+    randomBounce();
+    triggered = true;
+  } else if (
+    x <= area.leftSide - tommySize.width / 2 &&
+    x >= area.rightSide + tommySize.width / 2 &&
+    y <= area.topSide - tommySize.height / 2 &&
+    y >= area.bottomSide + tommySize.height / 2
+  ) {
+    triggered = false;
   }
-  const dirKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(dirKeys)]());
+};
+
+const mouseMove = (event) => {
+  isOverlapping(event.clientX, event.clientY);
+  touching = true;
+};
+
+const touchMove = (event) => {
+  isOverlapping(
+    event.changedTouches[0].clientX,
+    event.changedTouches[0].clientY,
+  );
   touching = true;
 };
 
