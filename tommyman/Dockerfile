@@ -1,5 +1,5 @@
 FROM alpine:latest
-EXPOSE 3002
+EXPOSE 3003
 WORKDIR /tommyman
 COPY . .
 COPY init.sh /bin
