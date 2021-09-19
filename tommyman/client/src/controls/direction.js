@@ -171,10 +171,16 @@ const hitsWall = () => {
   return false;
 };
 
-tommyman.addEventListener('mouseover', (event) => {
+const randomBounce = (event) => {
   const randomWord =
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
   randomWord.play();
   const dirKeys = Object.keys(allDirections);
   addInterval(allDirections[random(dirKeys)]());
-});
+};
+
+tommyman.addEventListener('mouseenter', randomBounce);
+tommyman.addEventListener('click', randomBounce);
+tommyman.addEventListener('touchstart', randomBounce);
+tommyman.addEventListener('touchmove', randomBounce);
+tommyman.addEventListener('touchend', randomBounce);
