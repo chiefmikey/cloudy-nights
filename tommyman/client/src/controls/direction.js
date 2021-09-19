@@ -179,7 +179,7 @@ const randomBounce = (event) => {
   addInterval(allDirections[random(dirKeys)]());
 };
 
-tommyman.addEventListener('mouseenter', randomBounce);
+tommyman.addEventListener('mouseover', randomBounce);
 tommyman.addEventListener('click', randomBounce);
 tommyman.addEventListener('touchstart', randomBounce);
 tommyman.addEventListener('touchmove', randomBounce);
