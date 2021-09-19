@@ -42,6 +42,7 @@ const decreaseSpeed = (event) => {
 };
 
 body.addEventListener('touchstart', touchStart);
+body.addEventListener('mouseover', touchStart);
 body.addEventListener('touchmove', touchMove);
 body.addEventListener('touchend', touchEnd);
 body.addEventListener('click', increaseSpeed);
