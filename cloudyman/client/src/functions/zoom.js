@@ -26,7 +26,6 @@ if (document.addEventListener) {
   document.addEventListener(
     'contextmenu',
     function (e) {
-      console.log();
       if (
         window.getComputedStyle(document.getElementById('zoom')).visibility ===
         'visible'
