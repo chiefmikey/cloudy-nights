@@ -150,37 +150,64 @@ const hitsWall = () => {
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
     randomNoise.play();
+    console.log(randomNoise);
     addInterval(aRight()());
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
+    console.log(randomNoise);
     addInterval(aLeft()());
     return true;
   }
   if (bottom <= 0) {
     randomNoise.play();
+    console.log(randomNoise);
     addInterval(aUp()());
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
+    console.log(randomNoise);
     addInterval(aDown()());
     return true;
   }
   return false;
 };
 
-const randomBounce = (event) => {
-  const randomWord =
-    allWords[((allWords.length - 1) * Math.random()).toFixed()];
-  randomWord.play();
-  const dirKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(dirKeys)]());
+const beginning = new Audio('../assets/sounds/beginning.mp3');
+beginning.volume = 0.9;
+let first = true;
+
+let touching = false;
+
+const touchEnd = (event) => {
+  touching = false;
 };
 
-tommyman.addEventListener('mouseover', randomBounce);
-tommyman.addEventListener('click', randomBounce);
-tommyman.addEventListener('touchstart', randomBounce);
-tommyman.addEventListener('touchmove', randomBounce);
-tommyman.addEventListener('touchend', randomBounce);
+const firstClick = (event) => {
+  if (first) {
+    beginning.play();
+    first = false;
+    tommyman.addEventListener('mouseover', randomBounce);
+    tommyman.addEventListener('touchstart', randomBounce);
+    tommyman.addEventListener('touchmove', randomBounce);
+    tommyman.addEventListener('touchend', touchEnd);
+    tommyman.addEventListener('mouseout', touchEnd);
+  }
+  touching = true;
+  randomBounce();
+};
+
+const randomBounce = (event) => {
+  if (!touching) {
+    const randomWord =
+      allWords[((allWords.length - 1) * Math.random()).toFixed()];
+    randomWord.play();
+  }
+  const dirKeys = Object.keys(allDirections);
+  addInterval(allDirections[random(dirKeys)]());
+  touching = true;
+};
+
+tommyman.addEventListener('click', firstClick);
