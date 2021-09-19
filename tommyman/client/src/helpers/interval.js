@@ -25,7 +25,6 @@ const addInterval = (interval) => {
   const speed = getSpeed();
   for (let i = 0; i < speed; i += 1) {
     intervals.push(interval());
-    console.log(intervals);
   }
 };
 

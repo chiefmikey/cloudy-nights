@@ -9,7 +9,7 @@ body {
 
 #tommyman {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 20vw;
+  max-width: 200px;
   object-fit: fill;
 }

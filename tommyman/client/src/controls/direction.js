@@ -16,8 +16,13 @@ gnarly.volume = 0.8;
 const allWords = [cool, crazy, gnarly];
 const allNoises = [d, ea, g];
 
-let left = bodySize.width / 2 - 100;
-let bottom = bodySize.height / 2 - 100;
+const tommySize = {
+  width: tommyman.clientWidth,
+  height: tommyman.clientHeight,
+};
+
+let left = bodySize.width / 2 - tommySize.width / 2;
+let bottom = bodySize.height / 2 - tommySize.height / 2;
 
 tommyman.style.left = `${left}px`;
 tommyman.style.bottom = `${bottom}px`;
