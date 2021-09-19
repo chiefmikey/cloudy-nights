@@ -153,7 +153,7 @@ const hitsWall = () => {
     addInterval(aRight()());
     return true;
   }
-  if (left >= bodySize.width - tommySize.width / 2) {
+  if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
     addInterval(aLeft()());
     return true;
@@ -163,7 +163,7 @@ const hitsWall = () => {
     addInterval(aUp()());
     return true;
   }
-  if (bottom >= bodySize.height - tommySize.height / 2) {
+  if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
     addInterval(aDown()());
     return true;
