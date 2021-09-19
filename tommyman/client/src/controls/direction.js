@@ -191,7 +191,6 @@ const touchEnd = (event) => {
 const randomBounce = (event) => {
   const randomWord =
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
-  console.log(first, touching, triggered);
   if (!first && (!touching || (touching && !triggered))) {
     randomWord.play();
   }
@@ -237,10 +236,10 @@ const isOverlapping = (x, y) => {
     randomBounce();
     triggered = true;
   } else if (
-    x <= area.leftSide - tommySize.width / 2 &&
-    x >= area.rightSide + tommySize.width / 2 &&
-    y <= area.topSide - tommySize.height / 2 &&
-    y >= area.bottomSide + tommySize.height / 2
+    x < area.leftSide - tommySize.width / 2 ||
+    x > area.rightSide + tommySize.width / 2 ||
+    y < area.topSide - tommySize.height / 2 ||
+    y > area.bottomSide + tommySize.height / 2
   ) {
     triggered = false;
   }
