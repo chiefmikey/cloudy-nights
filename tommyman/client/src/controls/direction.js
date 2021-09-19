@@ -149,22 +149,22 @@ const hitsWall = () => {
   const randomNoise =
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
-    randomNoise.play();
+    setTimeout(() => randomNoise.play());
     addInterval(aRight()());
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
-    randomNoise.play();
+    setTimeout(() => randomNoise.play());
     addInterval(aLeft()());
     return true;
   }
   if (bottom <= 0) {
-    randomNoise.play();
+    setTimeout(() => randomNoise.play());
     addInterval(aUp()());
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
-    randomNoise.play();
+    setTimeout(() => randomNoise.play());
     addInterval(aDown()());
     return true;
   }
@@ -174,7 +174,7 @@ const hitsWall = () => {
 const randomBounce = (event) => {
   const randomWord =
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
-  randomWord.play();
+  setTimeout(() => randomWord.play(), 0);
   const dirKeys = Object.keys(allDirections);
   addInterval(allDirections[random(dirKeys)]());
 };
