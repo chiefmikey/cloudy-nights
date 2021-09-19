@@ -7,11 +7,11 @@ export const bodySize = { width: body.clientWidth, height: body.clientHeight };
 const beginning = new Audio('../assets/sounds/beginning.mp3');
 beginning.volume = 0.9;
 let first = true;
-setTimeout(() => beginning.play());
+beginning.play();
 
 const touchStart = (event) => {
   if (first) {
-    setTimeout(() => beginning.play());
+    beginning.play();
     first = false;
   }
 };
