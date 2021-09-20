@@ -16,3 +16,8 @@ export const spinRight = () => {
   degrees += 1;
   tommyman.style.transform = `rotate(${degrees}deg)`;
 };
+
+export const tommySize = {
+  width: tommyman.clientWidth,
+  height: tommyman.clientHeight,
+};

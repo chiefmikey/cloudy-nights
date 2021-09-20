@@ -1,5 +1,11 @@
 import { body, bodySize } from '../elements/body.js';
-import { tommyman, move, spinLeft, spinRight } from '../elements/tommyman.js';
+import {
+  tommyman,
+  move,
+  spinLeft,
+  spinRight,
+  tommySize,
+} from '../elements/tommyman.js';
 import { speedUp, slowDown } from './speed.js';
 import addInterval from '../helpers/interval.js';
 
@@ -16,11 +22,6 @@ gnarly.volume = 0.8;
 
 const allWords = [cool, crazy, gnarly];
 const allNoises = [d, ea, g];
-
-const tommySize = {
-  width: tommyman.clientWidth,
-  height: tommyman.clientHeight,
-};
 
 let left = bodySize.width / 2 - tommySize.width / 2;
 let bottom = bodySize.height / 2 - tommySize.height / 2;
@@ -147,29 +148,30 @@ const aDown = () => {
 };
 
 const hitsWall = () => {
+  getOffset(tommyman);
   const randomNoise =
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
     randomNoise.play();
-    addInterval(aRight()());
+    addInterval(aRight()(), left, bottom);
     slowDown();
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
-    addInterval(aLeft()());
+    addInterval(aLeft()(), left, bottom);
     slowDown();
     return true;
   }
   if (bottom <= 0) {
     randomNoise.play();
-    addInterval(aUp()());
+    addInterval(aUp()(), left, bottom);
     slowDown();
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
-    addInterval(aDown()());
+    addInterval(aDown()(), left, bottom);
     slowDown();
     return true;
   }
@@ -188,18 +190,19 @@ const touchEnd = (event) => {
   triggered = false;
 };
 
-const randomBounce = (event) => {
+const randomBounce = () => {
   const randomWord =
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
   if (!first && (!touching || (touching && !triggered))) {
     randomWord.play();
   }
   const dirKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(dirKeys)]());
+  addInterval(allDirections[random(dirKeys)](), left, bottom);
   speedUp();
 };
 
 const firstClick = (event) => {
+  getOffset(tommyman);
   if (first) {
     beginning.play();
     tommyman.addEventListener('mousemove', mouseMove);
