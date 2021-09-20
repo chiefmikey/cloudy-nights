@@ -1,13 +1,13 @@
 import { tommyman } from '../elements/tommyman.js';
-
-let degrees = 0;
+import { getSpeed } from './speed.js';
 
 export const spinLeft = () => {
-  degrees -= 1;
-  tommyman.style.transform = `rotate(${degrees}deg)`;
+  const speed = getSpeed();
+  tommyman.style.transform = `rotate(${speed * -5000}deg)`;
 };
 
 export const spinRight = () => {
-  degrees += 1;
-  tommyman.style.transform = `rotate(${degrees}deg)`;
+  // degrees += 1;
+  const speed = getSpeed();
+  tommyman.style.transform = `rotate(${speed * 5000}deg)`;
 };

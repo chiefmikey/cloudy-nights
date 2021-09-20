@@ -2,6 +2,8 @@ import { tommyman, tommySize } from '../elements/tommyman.js';
 
 const graphic = document.getElementById('graphic');
 
+const allPrints = [];
+
 const print = (left, bottom) => {
   const svg = document.createElement('img');
   svg.src = 'assets/sprites/tommyman.svg';
@@ -10,11 +12,19 @@ const print = (left, bottom) => {
   svg.style.position = 'absolute';
   svg.style.left = `${left}px`;
   svg.style.bottom = `${bottom}px`;
+  svg.style.transition = 'opacity 4s ease-in-out';
   svg.style.filter = `invert(.5) sepia(2) saturate(2.5) hue-rotate(${
     360 * Math.random()
   }deg)`;
   svg.style.transform = `${tommyman.style.transform}`;
+  allPrints.push(svg);
   graphic.append(svg);
+
+  if (allPrints.length > 50) {
+    const removePrint = allPrints.shift();
+    removePrint.style.opacity = '0';
+    setTimeout(() => removePrint.remove(), 4100);
+  }
 };
 
 export default print;
