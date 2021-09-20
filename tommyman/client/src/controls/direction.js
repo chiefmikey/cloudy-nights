@@ -1,130 +1,93 @@
-import { body, bodySize } from '../elements/body.js';
-import {
-  tommyman,
-  move,
-  spinLeft,
-  spinRight,
-  tommySize,
-} from '../elements/tommyman.js';
-import { speedUp, slowDown } from './speed.js';
-import { addInterval, printImg } from '../helpers/interval.js';
-
-const cool = new Audio('../assets/sounds/cool.mp3');
-const crazy = new Audio('../assets/sounds/crazy.mp3');
-crazy.volume = 0.9;
-const d = new Audio('../assets/sounds/d.mp3');
-d.volume = 0.5;
-const ea = new Audio('../assets/sounds/ea.mp3');
-const g = new Audio('../assets/sounds/g.mp3');
-g.volume = 0.8;
-const gnarly = new Audio('../assets/sounds/gnarly.mp3');
-gnarly.volume = 0.8;
-
-const allWords = [cool, crazy, gnarly];
-const allNoises = [d, ea, g];
-
-let left = bodySize.width / 2 - tommySize.width / 2;
-let bottom = bodySize.height / 2 - tommySize.height / 2;
-
-tommyman.style.left = `${left}px`;
-tommyman.style.bottom = `${bottom}px`;
-
-const random = (keys) => keys[((keys.length - 1) * Math.random()).toFixed()];
+import { bodySize } from '../elements/body.js';
+import { tommySize } from '../elements/tommyman.js';
+import move from './move.js';
+import { spinLeft, spinRight } from './spin.js';
+import { slowDown, speedUp } from './speed.js';
+import { setPosition } from '../helpers/position.js';
+import addInterval from '../helpers/interval.js';
+import print from '../helpers/print.js';
+import { allNoises, allWords } from './audio.js';
+import random from '../helpers/random.js';
 
 const goLeft = () => {
   return () =>
     setInterval(() => {
-      left -= 1;
-      if (!hitsWall()) {
+      const pos = setPosition(-1, 0);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinLeft();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goLeftUp = () => {
   return () =>
     setInterval(() => {
-      left -= 1;
-      bottom += 1;
-      if (!hitsWall()) {
+      const pos = setPosition(-1, 1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinLeft();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goLeftDown = () => {
   return () =>
     setInterval(() => {
-      left -= 1;
-      bottom -= 1;
-      if (!hitsWall()) {
+      const pos = setPosition(-1, -1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinLeft();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goRight = () => {
   return () =>
     setInterval(() => {
-      left += 1;
-      if (!hitsWall()) {
+      const pos = setPosition(1, 0);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinRight();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goRightUp = () => {
   return () =>
     setInterval(() => {
-      left += 1;
-      bottom += 1;
-      if (!hitsWall()) {
+      const pos = setPosition(1, 1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinRight();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goRightDown = () => {
   return () =>
     setInterval(() => {
-      left += 1;
-      bottom -= 1;
-      if (!hitsWall()) {
+      const pos = setPosition(1, -1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinRight();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goUp = () => {
   return () =>
     setInterval(() => {
-      bottom += 1;
-      if (!hitsWall()) {
+      const pos = setPosition(0, 1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinLeft();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
 };
 const goDown = () => {
   return () =>
     setInterval(() => {
-      bottom -= 1;
-      if (!hitsWall()) {
+      const pos = setPosition(0, -1);
+      if (!hitsWall(pos.left, pos.bottom)) {
         spinRight();
-        move(left, bottom);
+        move(pos.left, pos.bottom);
       }
     }, 1);
-};
-
-const allDirections = {
-  left: goLeft,
-  right: goRight,
-  up: goUp,
-  down: goDown,
-  leftUp: goLeftUp,
-  rightUp: goRightUp,
-  leftDown: goLeftDown,
-  rightDown: goRightDown,
 };
 
 const aRight = () => {
@@ -147,34 +110,33 @@ const aDown = () => {
   return random(allDowns);
 };
 
-const hitsWall = () => {
-  getOffset(tommyman);
+const hitsWall = (left, bottom) => {
   const randomNoise =
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
     randomNoise.play();
-    printImg(left, bottom);
+    print(left, bottom);
     addInterval(aRight()());
     slowDown();
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
-    printImg(left, bottom);
+    print(left, bottom);
     addInterval(aLeft()());
     slowDown();
     return true;
   }
   if (bottom <= 0) {
     randomNoise.play();
-    printImg(left, bottom);
+    print(left, bottom);
     addInterval(aUp()());
     slowDown();
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
-    printImg(left, bottom);
+    print(left, bottom);
     addInterval(aDown()());
     slowDown();
     return true;
@@ -182,89 +144,29 @@ const hitsWall = () => {
   return false;
 };
 
-const beginning = new Audio('../assets/sounds/beginning.mp3');
-beginning.volume = 0.9;
-
-let first = true;
-let touching = false;
-let triggered = true;
-
-const touchEnd = (event) => {
-  touching = false;
-  triggered = false;
-};
-
-const randomBounce = () => {
+export const randomBounce = (touching, triggered, first) => {
+  const pos = setPosition(0, 0);
   const randomWord =
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
   if (!first && (!touching || (touching && !triggered))) {
     randomWord.play();
-    printImg(left, bottom);
+    print(pos.left, pos.bottom);
+  }
+  if (first) {
+    print(pos.left, pos.bottom);
   }
   const dirKeys = Object.keys(allDirections);
   addInterval(allDirections[random(dirKeys)]());
   speedUp();
 };
 
-const firstClick = (event) => {
-  getOffset(tommyman);
-  if (first) {
-    beginning.play();
-    tommyman.addEventListener('mousemove', mouseMove);
-    tommyman.addEventListener('touchstart', randomBounce);
-    tommyman.addEventListener('touchend', touchEnd);
-    tommyman.addEventListener('mouseout', touchEnd);
-    tommyman.addEventListener('touchmove', touchMove);
-    body.addEventListener('touchmove', touchMove);
-    body.addEventListener('touchend', touchEnd);
-    first = false;
-  }
-  touching = true;
-  randomBounce();
-  printImg(left, bottom);
+export const allDirections = {
+  left: goLeft,
+  right: goRight,
+  up: goUp,
+  down: goDown,
+  leftUp: goLeftUp,
+  rightUp: goRightUp,
+  leftDown: goLeftDown,
+  rightDown: goRightDown,
 };
-
-const getOffset = (el) => {
-  const rect = el.getBoundingClientRect();
-  return {
-    leftSide: rect.left + window.scrollX,
-    rightSide: rect.right + window.scrollX,
-    topSide: rect.top + window.scrollY,
-    bottomSide: rect.bottom + window.scrollY,
-  };
-};
-
-const isOverlapping = (x, y) => {
-  const area = getOffset(tommyman);
-  if (
-    x >= area.leftSide + tommySize.width / 6 &&
-    x <= area.rightSide - tommySize.width / 6 &&
-    y >= area.topSide + tommySize.height / 6 &&
-    y <= area.bottomSide - tommySize.height / 6
-  ) {
-    randomBounce();
-    triggered = true;
-  } else if (
-    x < area.leftSide - tommySize.width / 2 ||
-    x > area.rightSide + tommySize.width / 2 ||
-    y < area.topSide - tommySize.height / 2 ||
-    y > area.bottomSide + tommySize.height / 2
-  ) {
-    triggered = false;
-  }
-};
-
-const mouseMove = (event) => {
-  isOverlapping(event.clientX, event.clientY);
-  touching = true;
-};
-
-const touchMove = (event) => {
-  isOverlapping(
-    event.changedTouches[0].clientX,
-    event.changedTouches[0].clientY,
-  );
-  touching = true;
-};
-
-tommyman.addEventListener('click', firstClick);
