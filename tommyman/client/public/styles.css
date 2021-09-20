@@ -4,6 +4,8 @@ div,
 svg,
 img {
   user-select: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
   -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
@@ -30,8 +32,10 @@ body {
 
 #tommyman {
   position: absolute;
+  padding: 0;
+  margin: 0;
   width: 20%;
-  height: 20%;
+  height: auto;
   max-width: 200px;
   max-height: 200px;
   overflow: visible;
@@ -40,6 +44,10 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1;
+}
+
+#sprite {
+  width: 100%;
 }
 
 #graphic {
