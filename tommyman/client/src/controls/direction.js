@@ -7,7 +7,7 @@ import {
   tommySize,
 } from '../elements/tommyman.js';
 import { speedUp, slowDown } from './speed.js';
-import addInterval from '../helpers/interval.js';
+import { addInterval, printImg } from '../helpers/interval.js';
 
 const cool = new Audio('../assets/sounds/cool.mp3');
 const crazy = new Audio('../assets/sounds/crazy.mp3');
@@ -153,25 +153,29 @@ const hitsWall = () => {
     allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
   if (left <= 0) {
     randomNoise.play();
-    addInterval(aRight()(), left, bottom);
+    printImg(left, bottom);
+    addInterval(aRight()());
     slowDown();
     return true;
   }
   if (left >= bodySize.width - tommySize.width) {
     randomNoise.play();
-    addInterval(aLeft()(), left, bottom);
+    printImg(left, bottom);
+    addInterval(aLeft()());
     slowDown();
     return true;
   }
   if (bottom <= 0) {
     randomNoise.play();
-    addInterval(aUp()(), left, bottom);
+    printImg(left, bottom);
+    addInterval(aUp()());
     slowDown();
     return true;
   }
   if (bottom >= bodySize.height - tommySize.height) {
     randomNoise.play();
-    addInterval(aDown()(), left, bottom);
+    printImg(left, bottom);
+    addInterval(aDown()());
     slowDown();
     return true;
   }
@@ -195,9 +199,10 @@ const randomBounce = () => {
     allWords[((allWords.length - 1) * Math.random()).toFixed()];
   if (!first && (!touching || (touching && !triggered))) {
     randomWord.play();
+    printImg(left, bottom);
   }
   const dirKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(dirKeys)](), left, bottom);
+  addInterval(allDirections[random(dirKeys)]());
   speedUp();
 };
 
@@ -216,6 +221,7 @@ const firstClick = (event) => {
   }
   touching = true;
   randomBounce();
+  printImg(left, bottom);
 };
 
 const getOffset = (el) => {
