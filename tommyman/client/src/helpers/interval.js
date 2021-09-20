@@ -69,9 +69,7 @@ const addInterval = (interval, left, bottom) => {
     paths.style.transform = `${tommyman.style.transform}`;
     graphic.append(paths);
   };
-  if (left && bottom) {
-    newCircle(hash());
-  }
+  newCircle(hash());
 
   const speed = getSpeed();
   for (let i = 0; i < speed; i += 1) {
