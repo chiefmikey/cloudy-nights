@@ -3,7 +3,7 @@ import { tommySize } from '../elements/tommyman.js';
 import move from './move.js';
 import { spinLeft, spinRight } from './spin.js';
 import { slowDown, speedUp } from './speed.js';
-import { setPosition } from '../helpers/position.js';
+import setPosition from '../helpers/position.js';
 import addInterval from '../helpers/interval.js';
 import print from '../helpers/print.js';
 import { allNoises, allWords } from './audio.js';
