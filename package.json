@@ -7,7 +7,7 @@
     "test": "nodemon app.js"
   },
   "devDependencies": {
-    "@mikey-pro/style-guide": "^1.4.9"
+    "@mikey-pro/style-guide": "^1.5.1"
   },
   "license": "MIT",
   "repository": {
