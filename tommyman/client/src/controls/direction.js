@@ -12,12 +12,15 @@ import random from '../helpers/random.js';
 const goLeft = () => {
   return () =>
     setInterval(() => {
-      const pos = setPosition(-1, 0);
-      if (!hitsWall(pos.left, pos.bottom)) {
-        spinLeft();
-        move(pos.left, pos.bottom);
-      }
-    }, 1);
+      spinLeft();
+      move(-1, 0);
+      // const pos = setPosition(-1, 0);
+      //   if (!hitsWall(pos.left, pos.bottom)) {
+      //     spinLeft();
+      //     move(pos.left, pos.bottom);
+      //   }
+      // }, 1);
+    });
 };
 const goLeftUp = () => {
   return () =>
