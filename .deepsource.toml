@@ -10,6 +10,12 @@ exclude_patterns = [
 name = "docker"
 enabled = true
 
+  [analyzers.meta]
+  dockerfile_paths = [
+    "/cloudyman",
+    "/tommyman"
+  ]
+
 [[analyzers]]
 name = "shell"
 enabled = true
