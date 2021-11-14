@@ -13,15 +13,15 @@ const goLeft = () => {
   return () =>
     setInterval(() => {
       spinLeft();
-      move(-1, 0);
-      // const pos = setPosition(-1, 0);
-      //   if (!hitsWall(pos.left, pos.bottom)) {
-      //     spinLeft();
-      //     move(pos.left, pos.bottom);
-      //   }
-      // }, 1);
-    });
+      // move(-1, 0);
+      const pos = setPosition(-1, 0);
+      if (!hitsWall(pos.left, pos.bottom)) {
+        spinLeft();
+        move(pos.left, pos.bottom);
+      }
+    }, 1);
 };
+
 const goLeftUp = () => {
   return () =>
     setInterval(() => {
@@ -115,7 +115,7 @@ const aDown = () => {
 
 const hitsWall = (left, bottom) => {
   const randomNoise =
-    allNoises[((allNoises.length - 1) * Math.random()).toFixed()];
+    allNoises[((allNoises.length - 1) * Math.random()).toFixed(0)];
   if (left <= 0) {
     randomNoise.play();
     print(left, bottom);
@@ -150,7 +150,7 @@ const hitsWall = (left, bottom) => {
 export const randomBounce = (touching, triggered, first) => {
   const pos = setPosition(0, 0);
   const randomWord =
-    allWords[((allWords.length - 1) * Math.random()).toFixed()];
+    allWords[((allWords.length - 1) * Math.random()).toFixed(0)];
   if (!first && (!touching || (touching && !triggered))) {
     randomWord.play();
     print(pos.left, pos.bottom);
@@ -158,8 +158,8 @@ export const randomBounce = (touching, triggered, first) => {
   if (first) {
     print(pos.left, pos.bottom);
   }
-  const dirKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(dirKeys)]());
+  const directionKeys = Object.keys(allDirections);
+  addInterval(allDirections[random(directionKeys)]());
   speedUp();
 };
 

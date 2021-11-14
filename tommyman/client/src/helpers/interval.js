@@ -3,8 +3,8 @@ import { getSpeed } from '../controls/speed.js';
 let intervals = [];
 
 const clearAll = () => {
-  for (let i = 0; i < intervals.length; i += 1) {
-    clearInterval(intervals[i]);
+  for (const interval of intervals) {
+    clearInterval(interval);
   }
   intervals = [];
 };
@@ -12,7 +12,7 @@ const clearAll = () => {
 const addInterval = (interval) => {
   clearAll();
   const speed = getSpeed();
-  for (let i = 0; i < speed; i += 1) {
+  for (let index = 0; index < speed; index += 1) {
     intervals.push(interval());
   }
 };

@@ -7,9 +7,9 @@ let bottom = bodySize.height / 2 - tommySize.height / 2;
 tommyman.style.left = `${left}px`;
 tommyman.style.bottom = `${bottom}px`;
 
-const setPosition = (leftNum, bottomNum) => {
-  left += leftNum;
-  bottom += bottomNum;
+const setPosition = (leftNumber, bottomNumber) => {
+  left += leftNumber;
+  bottom += bottomNumber;
   return { left, bottom };
 };
 

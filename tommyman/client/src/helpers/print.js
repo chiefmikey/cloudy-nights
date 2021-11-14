@@ -1,6 +1,6 @@
 import { tommyman, tommySize } from '../elements/tommyman.js';
 
-const graphic = document.getElementById('graphic');
+const graphic = document.querySelector('#graphic');
 
 const allPrints = [];
 

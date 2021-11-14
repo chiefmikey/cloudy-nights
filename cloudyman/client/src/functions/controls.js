@@ -13,18 +13,18 @@ const controls = () => {
   const player = playerOne();
   const SPEED = 80;
 
-  const dirs = {
+  const directories = {
     left: K.vec2(-1, 0),
     up: K.vec2(0, -1),
     right: K.vec2(1, 0),
     down: K.vec2(0, 1),
   };
 
-  const dirKeys = Object.keys(dirs);
-  for (let i = 0; i < dirKeys.length; i += 1) {
-    K.keyPress(dirKeys[i], ifTalking);
-    K.keyDown(dirKeys[i], () => {
-      player.move(dirs[dirKeys[i]].scale(SPEED));
+  const directionKeys = Object.keys(directories);
+  for (const key of directionKeys) {
+    K.keyPress(key, ifTalking);
+    K.keyDown(key, () => {
+      player.move(directories[key].scale(SPEED));
     });
   }
 
@@ -32,33 +32,34 @@ const controls = () => {
     ifTalking();
     timer = setInterval(() => {
       if (isDown) {
-        player.move(dirs[direction].scale(SPEED));
+        player.move(directories[direction].scale(SPEED));
       }
     }, 15);
   };
 };
 
-const playerMove = (e) => {
-  e.preventDefault();
-  e.returnValue = false;
+const playerMove = (event) => {
+  event.preventDefault();
+  // eslint-disable-next-line no-param-reassign
+  event.returnValue = false;
   if (
-    e.type !== 'mouseup' &&
-    e.type !== 'touchend' &&
-    e.type !== 'touchcancel' &&
-    (e.target.id === 'up' ||
-      e.target.id === 'right' ||
-      e.target.id === 'down' ||
-      e.target.id === 'left')
+    event.type !== 'mouseup' &&
+    event.type !== 'touchend' &&
+    event.type !== 'touchcancel' &&
+    (event.target.id === 'up' ||
+      event.target.id === 'right' ||
+      event.target.id === 'down' ||
+      event.target.id === 'left')
   ) {
     if (
-      e.buttons === 1 ||
-      e.buttons === 3 ||
-      e.type === 'touchstart' ||
-      e.type === 'touchmove'
+      event.buttons === 1 ||
+      event.buttons === 3 ||
+      event.type === 'touchstart' ||
+      event.type === 'touchmove'
     ) {
       clearInterval(timer);
       isDown = true;
-      direction = e.target.id;
+      direction = event.target.id;
       getMoving();
     }
   } else {
@@ -67,14 +68,14 @@ const playerMove = (e) => {
   }
 };
 
-const blackScreen = document.getElementById('blackScreen');
-const title = document.getElementById('title');
+const blackScreen = document.querySelector('#blackScreen');
+const title = document.querySelector('#title');
 
 const touchStart = () => {
   if (!sound && getComputedStyle(title).opacity === '1') {
     K.play('coin');
     sound = true;
-    document.getElementById('controls').style.pointerEvents = 'all';
+    document.querySelector('#controls').style.pointerEvents = 'all';
     blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
     title.style.animation = 'fadeOut .2s linear 0s forwards';
     controls();

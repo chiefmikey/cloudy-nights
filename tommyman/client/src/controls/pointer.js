@@ -7,18 +7,18 @@ let first = true;
 let touching = false;
 let triggered = true;
 
-const mouseMove = (event) => {
+const mouseMove = () => {
   randomBounce(touching, triggered, first);
   triggered = true;
   touching = true;
 };
 
-const touchEnd = (event) => {
+const touchEnd = () => {
   touching = false;
   triggered = false;
 };
 
-const firstClick = (event) => {
+const firstClick = () => {
   if (first) {
     allAudio.beginning.play();
     tommyman.addEventListener('mousemove', mouseMove);
