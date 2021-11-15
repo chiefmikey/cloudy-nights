@@ -1,7 +1,7 @@
 import kaboom from 'kaboom';
 
 const K = kaboom({
-  canvas: document.getElementById('game'),
+  canvas: document.querySelector('#game'),
   clearColor: [0, 0, 0, 1],
   crisp: true,
   fullscreen: false,
@@ -13,7 +13,7 @@ const K = kaboom({
   plugins: [],
 });
 
-// K.loadRoot('/client/public/');
+K.loadRoot('/cloudyman/client/public/');
 K.loadSprite('ch1', 'assets/sprites/ch1.png');
 K.loadSprite('ch2', 'assets/sprites/ch2.png');
 K.loadSprite('cloudyman', 'assets/sprites/cloudyman.png');

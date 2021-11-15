@@ -83,16 +83,16 @@ const touchStart = () => {
 };
 
 blackScreen.addEventListener('mousedown', touchStart);
-blackScreen.addEventListener('touchstart', touchStart);
+blackScreen.addEventListener('touchstart', touchStart, { passive: true });
 title.addEventListener('mousedown', touchStart);
-title.addEventListener('touchstart', touchStart);
+title.addEventListener('touchstart', touchStart, { passive: true });
 
 document.addEventListener('mousedown', playerMove);
 document.addEventListener('mouseup', playerMove);
 document.addEventListener('mouseover', playerMove);
-document.addEventListener('touchstart', playerMove, false);
+document.addEventListener('touchstart', playerMove, false, { passive: true });
 document.addEventListener('touchend', playerMove, false);
-document.addEventListener('touchmove', playerMove, false);
+document.addEventListener('touchmove', playerMove, false, { passive: true });
 document.addEventListener('touchcancel', playerMove, false);
 
 export default controls;

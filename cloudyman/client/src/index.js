@@ -1,3 +1,4 @@
+import 'airbnb-browser-shims';
 import K from './functions/init.js';
 import one from './scenes/one.js';
 import two from './scenes/two.js';

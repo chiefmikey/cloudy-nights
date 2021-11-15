@@ -1,3 +1,4 @@
+import 'airbnb-browser-shims';
 import { tommyman } from './elements/tommyman.js';
 import './elements/body.js';
 import './controls/audio.js';

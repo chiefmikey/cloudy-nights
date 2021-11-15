@@ -1,9 +1,11 @@
-import path from 'path';
+import path from 'node:path';
 
 const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf('/'));
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/public/dist');
+
+const css = ['style-loader', 'css-loader'];
 
 export default {
   mode: 'development',
@@ -33,7 +35,7 @@ export default {
       },
       {
         test: /\.css$/,
-        loader: 'css-loader',
+        use: css,
       },
       {
         test: /\.(png|ttf|jp(e*)g|svg)$/,

@@ -26,11 +26,12 @@ const firstClick = () => {
     tommyman.addEventListener(
       'touchstart',
       randomBounce(touching, triggered, first),
+      { passive: true },
     );
     tommyman.addEventListener('touchend', touchEnd);
     tommyman.addEventListener('mouseout', touchEnd);
-    tommyman.addEventListener('touchmove', mouseMove);
-    body.addEventListener('touchmove', mouseMove);
+    tommyman.addEventListener('touchmove', mouseMove, { passive: true });
+    body.addEventListener('touchmove', mouseMove, { passive: true });
     body.addEventListener('touchend', touchEnd);
     first = false;
   }

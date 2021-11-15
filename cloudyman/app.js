@@ -2,7 +2,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import serve from 'koa-static';
-import path from 'path';
+import path from 'node:path';
 // import submitRouter from './routes/submit.js';
 // import './db/index.js';
 

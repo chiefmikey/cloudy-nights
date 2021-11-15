@@ -41,7 +41,7 @@ const one = () => {
           },
         ];
       }
-      return undefined;
+      return char;
     },
   });
 };

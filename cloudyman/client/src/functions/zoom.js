@@ -2,44 +2,44 @@ let isZoomed = false;
 
 const zoom = () => {
   if (!isZoomed) {
-    document.getElementById('body').style.justifyContent = 'flex-start';
-    document.getElementById('app').style.justifyContent = 'flex-start';
-    document.getElementById('app').style.height = '190%';
-    document.getElementById('zoom').style.visibility = 'visible';
-    document.getElementById('title').style.transform = 'scale(2.1)';
-    document.getElementById('background').style.maxWidth = 'none';
+    document.querySelector('#body').style.justifyContent = 'flex-start';
+    document.querySelector('#app').style.justifyContent = 'flex-start';
+    document.querySelector('#app').style.height = '190%';
+    document.querySelector('#zoom').style.visibility = 'visible';
+    document.querySelector('#title').style.transform = 'scale(2.1)';
+    document.querySelector('#background').style.maxWidth = 'none';
     isZoomed = true;
   } else {
-    document.getElementById('body').style.justifyContent = 'center';
-    document.getElementById('app').style.justifyContent = 'center';
-    document.getElementById('app').style.height = '100%';
-    document.getElementById('zoom').style.visibility = '';
-    document.getElementById('title').style.transform = 'scale(1)';
-    document.getElementById('background').style.maxWidth = '100%';
+    document.querySelector('#body').style.justifyContent = 'center';
+    document.querySelector('#app').style.justifyContent = 'center';
+    document.querySelector('#app').style.height = '100%';
+    document.querySelector('#zoom').style.visibility = '';
+    document.querySelector('#title').style.transform = 'scale(1)';
+    document.querySelector('#background').style.maxWidth = '100%';
     isZoomed = false;
   }
 };
 
-document.getElementById('zoom').addEventListener('click', zoom);
+document.querySelector('#zoom').addEventListener('click', zoom);
 
 if (document.addEventListener) {
   document.addEventListener(
     'contextmenu',
-    function (e) {
+    (event_) => {
       if (
-        window.getComputedStyle(document.getElementById('zoom')).visibility ===
+        window.getComputedStyle(document.querySelector('#zoom')).visibility ===
         'visible'
       ) {
         zoom();
       }
-      e.preventDefault();
+      event_.preventDefault();
     },
     false,
   );
 } else {
-  document.attachEvent('oncontextmenu', function () {
+  document.attachEvent('oncontextmenu', () => {
     if (
-      window.getComputedStyle(document.getElementById('zoom')).visibility ===
+      window.getComputedStyle(document.querySelector('#zoom')).visibility ===
       'visible'
     ) {
       zoom();
