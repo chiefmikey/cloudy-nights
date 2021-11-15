@@ -6,7 +6,7 @@ const allPrints = [];
 
 const print = (left, bottom) => {
   const svg = document.createElement('img');
-  svg.src = '/tommyman/client/public/assets/sprites/tommyman.svg';
+  svg.src = 'tommyman/client/public/assets/sprites/tommyman.svg';
   svg.style.width = `${tommySize.width}px`;
   svg.style.height = 'auto';
   svg.style.position = 'absolute';
