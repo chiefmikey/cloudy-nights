@@ -1,19 +1,14 @@
 {
   "name": "cloudy-nights",
-  "version": "0.0.1",
-  "description": "It's a Cloudy Night",
-  "main": "app.js",
+  "version": "1.0.0",
+  "description": "It's a cloudy night...",
+  "main": "cloudy-nights/app.js",
   "scripts": {
     "build": "webpack --mode development",
     "dev": "NODE_ENV=development webpack --mode development -w",
     "prod": "NODE_ENV=production webpack --mode production",
-    "start": "node app.js",
-    "test": "nodemon app.js"
-  },
-  "dependencies": {
-    "koa": "^2.13.4",
-    "koa-static": "^5.0.0",
-    "path": "^0.12.7"
+    "start": "node cloudy-nights/app.js",
+    "test": "nodemon cloudy-nights/app.js"
   },
   "devDependencies": {
     "@mikey-pro/style-guide": "^2.2.8",
@@ -25,14 +20,20 @@
     "url": "git+https://github.com/chiefmikey/cloudy-nights.git"
   },
   "homepage": "https://github.com/chiefmikey/cloudy-nights#readme",
-  "author": "Chief",
+  "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
   "bugs": {
     "url": "https://github.com/chiefmikey/cloudy-nights/issues"
   },
   "keywords": [
     "cloudy-nights",
     "cloudy",
-    "nights"
+    "nights",
+    "tommyman",
+    "cloudyman",
+    "itsacloudynight"
+  ],
+  "contributors": [
+    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
   ],
   "type": "module",
   "prettier": "@mikey-pro/prettier-config",
