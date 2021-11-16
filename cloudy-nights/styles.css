@@ -29,10 +29,11 @@
 
 .text {
   width: 20%;
+  padding-left: 2%;
   font-family: monospace;
-  font-size: 2rem;
+  font-size: calc(2vmin + 2vw);
   font-weight: 300;
   color: #999;
-  text-align: center;
+  text-align: left;
   -webkit-font-smoothing: auto;
 }
