@@ -16,7 +16,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "@mikey-pro/style-guide": "^2.2.8",
+    "@mikey-pro/style-guide": "^2.2.10",
     "nodemon": "^2.0.15"
   },
   "license": "MIT",
