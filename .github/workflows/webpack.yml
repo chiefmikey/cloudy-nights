@@ -42,7 +42,7 @@ jobs:
         message: 'Update production bundle'
         pathspec_error_handling: exitImmediately
         pull: 'NO-PULL'
-        push: origin client --force
+        push: origin client -f
         remove: '-r webpack.config.js README.md package.json package-lock.json .gitignore .deepsource.toml .github app.js'
         signoff: false
         # tag: 'v1.0.0 --force'
