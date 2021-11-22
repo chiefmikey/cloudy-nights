@@ -5,18 +5,17 @@ const css = ['style-loader', 'css-loader'];
 export default {
   mode: 'development',
   entry: {
-    'tommyman-bundle': path.join(
-      path.resolve(),
-      'tommyman/client/src/index.js',
-    ),
-    'cloudyman-bundle': path.join(
-      path.resolve(),
-      'cloudyman/client/src/index.js',
-    ),
+    'tommyman-bundle': {
+      import: './tommyman/client/src/index.js',
+      filename: 'tommyman/client/public/dist/[name].js',
+    },
+    'cloudyman-bundle': {
+      import: './cloudyman/client/src/index.js',
+      filename: 'cloudyman/client/public/dist/[name].js',
+    },
   },
   output: {
-    filename: '[name].js',
-    path: path.join(path.resolve(), 'docs/dist'),
+    path: path.resolve(),
   },
   module: {
     rules: [
