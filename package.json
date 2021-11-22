@@ -7,8 +7,8 @@
     "build": "webpack --mode development",
     "dev": "NODE_ENV=development webpack --mode development -w",
     "prod": "NODE_ENV=production webpack --mode production",
-    "start": "node cloudy-nights/app.js",
-    "test": "nodemon cloudy-nights/app.js"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "dependencies": {
     "airbnb-browser-shims": "^3.3.0",
