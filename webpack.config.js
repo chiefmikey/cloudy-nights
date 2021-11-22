@@ -1,18 +1,22 @@
 import path from 'node:path';
 
-const __dirname = import.meta.url.slice(7, import.meta.url.lastIndexOf('/'));
-
-const SRC_DIR = path.join(__dirname, '/client/src');
-const DIST_DIR = path.join(__dirname, '/client/public/dist');
-
 const css = ['style-loader', 'css-loader'];
 
 export default {
   mode: 'development',
-  entry: `${SRC_DIR}/index.js`,
+  entry: {
+    'tommyman-bundle': path.join(
+      path.resolve(),
+      'tommyman/client/src/index.js',
+    ),
+    'cloudyman-bundle': path.join(
+      path.resolve(),
+      'cloudyman/client/src/index.js',
+    ),
+  },
   output: {
-    filename: 'cloudyman-bundle.js',
-    path: DIST_DIR,
+    filename: '[name].js',
+    path: path.join(path.resolve(), 'docs/dist'),
   },
   module: {
     rules: [
