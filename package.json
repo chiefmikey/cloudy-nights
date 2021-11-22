@@ -11,9 +11,12 @@
     "test": "nodemon cloudy-nights/app.js"
   },
   "dependencies": {
+    "airbnb-browser-shims": "^3.3.0",
+    "kaboom": "^0.5.1",
     "koa": "^2.13.4",
     "koa-static": "^5.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "the-new-css-reset": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
