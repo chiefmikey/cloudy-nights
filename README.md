@@ -2,9 +2,9 @@
 
 # **Cloudy Nights**
 
-## [Cloudyman](https:/itsacloudynight.com/cloudyman)
+## [Cloudyman](https://itsacloudynight.com/cloudyman)
 
-### **You can find the [Cloudyman](https:/itsacloudynight.com/cloudyman),**
+### **You can find the [Cloudyman](https://itsacloudynight.com/cloudyman),**
 
 _but can you hear his cry?_
 
