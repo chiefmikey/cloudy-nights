@@ -1,6 +1,7 @@
-import K from './init.js';
-import { ifTalking } from '../content/talking.js';
 import playerOne from '../content/player.js';
+import { ifTalking } from '../content/talking.js';
+
+import K from './init.js';
 import './zoom.js';
 
 let getMoving = () => {};

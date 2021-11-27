@@ -1,6 +1,6 @@
 import 'airbnb-browser-shims';
-import 'the-new-css-reset';
-import '../public/styles.css';
+import 'the-new-css-reset/css/reset.css';
+import './styles.css';
 import { tommyman } from './elements/tommyman.js';
 import './elements/body.js';
 import './controls/audio.js';

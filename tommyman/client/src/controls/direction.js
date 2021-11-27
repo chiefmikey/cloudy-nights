@@ -1,13 +1,14 @@
 import { bodySize } from '../elements/body.js';
 import { tommySize } from '../elements/tommyman.js';
-import move from './move.js';
-import { spinLeft, spinRight } from './spin.js';
-import { slowDown, speedUp } from './speed.js';
-import setPosition from '../helpers/position.js';
 import addInterval from '../helpers/interval.js';
+import setPosition from '../helpers/position.js';
 import print from '../helpers/print.js';
-import { allNoises, allWords } from './audio.js';
 import random from '../helpers/random.js';
+
+import { allNoises, allWords } from './audio.js';
+import move from './move.js';
+import { slowDown, speedUp } from './speed.js';
+import { spinLeft, spinRight } from './spin.js';
 
 const goLeft = () => {
   return () =>

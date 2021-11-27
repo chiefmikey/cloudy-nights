@@ -16,18 +16,21 @@
     "koa": "^2.13.4",
     "koa-static": "^5.0.0",
     "path": "^0.12.7",
-    "the-new-css-reset": "^1.4.0"
+    "the-new-css-reset": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
-    "@mikey-pro/style-guide": "^2.2.10",
+    "@mikey-pro/style-guide": "^3.0.5",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
+    "eslint": "^8.3.0",
     "nodemon": "^2.0.15",
+    "prettier": "^2.5.0",
     "style-loader": "^3.3.1",
+    "stylelint": "^14.1.0",
     "url-loader": "^4.1.1",
-    "webpack": "^5.64.2",
+    "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1"
   },
   "license": "MIT",

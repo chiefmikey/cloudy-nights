@@ -1,5 +1,6 @@
-import { tommyman } from '../elements/tommyman.js';
 import { body } from '../elements/body.js';
+import { tommyman } from '../elements/tommyman.js';
+
 import { allAudio } from './audio.js';
 import { randomBounce } from './direction.js';
 

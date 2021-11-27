@@ -26,9 +26,9 @@ body {
   overflow: hidden;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   flex-direction: column;
-  background-color: black;
-  justify-content: center;
+  background-color: #000;
   align-items: center;
+  justify-content: center;
 }
 
 button {
@@ -46,7 +46,7 @@ button {
   height: 100%;
   pointer-events: none;
   user-select: none;
-  background-color: black;
+  background-color: #000;
   opacity: 100%;
   animation: fadeOut 1s linear 0s forwards;
   touch-action: none;

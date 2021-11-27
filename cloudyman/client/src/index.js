@@ -1,6 +1,6 @@
 import 'airbnb-browser-shims';
-import 'the-new-css-reset';
-import '../public/styles.css';
+import 'the-new-css-reset/css/reset.css';
+import './styles.css';
 import K from './functions/init.js';
 import one from './scenes/one.js';
 import two from './scenes/two.js';

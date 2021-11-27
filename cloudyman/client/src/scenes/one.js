@@ -1,6 +1,5 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import K from '../functions/init.js';
 import characters from '../content/characters.js';
+import K from '../functions/init.js';
 
 const one = () => {
   const level = [
