@@ -23,6 +23,7 @@ const two = () => {
   ];
 
   K.addLevel(level, {
+    any: undefined,
     width: 11,
     height: 11,
     pos: K.vec2(20, 20),
