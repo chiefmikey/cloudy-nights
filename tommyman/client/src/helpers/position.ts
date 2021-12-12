@@ -1,5 +1,5 @@
-import { bodySize } from '../elements/body.js';
-import { tommyman, tommySize } from '../elements/tommyman.js';
+import { bodySize } from '../elements/body';
+import { tommyman, tommySize } from '../elements/tommyman';
 
 let left: number;
 let bottom: number;

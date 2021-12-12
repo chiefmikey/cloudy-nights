@@ -7,25 +7,27 @@ import './zoom';
 let getMoving = () => {};
 let isDown = false;
 let direction: string;
-let timer;
+let timer: NodeJS.Timer;
 let sound = false;
 
 const controls = () => {
   const player = playerOne();
   const SPEED = 80;
 
-  const directories = {
+  const allDirections = {
     left: K.vec2(-1, 0),
     up: K.vec2(0, -1),
     right: K.vec2(1, 0),
     down: K.vec2(0, 1),
   };
 
-  const directionKeys = Object.keys(directories);
+  const directionKeys = Object.keys(allDirections);
   for (const key of directionKeys) {
     K.keyPress(key, ifTalking);
     K.keyDown(key, () => {
-      player.move(directories[key].scale(SPEED));
+      player.move(
+        allDirections[key as keyof typeof allDirections].scale(SPEED),
+      );
     });
   }
 
@@ -33,7 +35,9 @@ const controls = () => {
     ifTalking();
     timer = setInterval(() => {
       if (isDown) {
-        player.move(directories[direction].scale(SPEED));
+        player.move(
+          allDirections[direction as keyof typeof allDirections].scale(SPEED),
+        );
       }
     }, 15);
   };
@@ -60,8 +64,8 @@ const playerMove = (event: MouseEvent) => {
     ) {
       clearInterval(timer);
       isDown = true;
-      if (event.target.id) {
-        direction = event.target.id;
+      if ((event.target as Element).id) {
+        direction = (event.target as Element).id;
       }
       getMoving();
     }
@@ -94,9 +98,9 @@ title.addEventListener('touchstart', touchStart, { passive: true });
 document.addEventListener('mousedown', playerMove);
 document.addEventListener('mouseup', playerMove);
 document.addEventListener('mouseover', playerMove);
-document.addEventListener('touchstart', playerMove, false, { passive: true });
+document.addEventListener('touchstart', playerMove, { passive: true });
 document.addEventListener('touchend', playerMove, false);
-document.addEventListener('touchmove', playerMove, false, { passive: true });
+document.addEventListener('touchmove', playerMove, { passive: true });
 document.addEventListener('touchcancel', playerMove, false);
 
 export default controls;

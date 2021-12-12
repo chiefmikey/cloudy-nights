@@ -1,4 +1,4 @@
-import { tommyman } from '../elements/tommyman.js';
+import { tommyman } from '../elements/tommyman';
 
 const move = (left: number, bottom: number) => {
   // tommyman.style.transform = `translateY(${left}%)`;

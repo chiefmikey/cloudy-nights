@@ -1,4 +1,4 @@
-import { tommyman, tommySize } from '../elements/tommyman.js';
+import { tommyman, tommySize } from '../elements/tommyman';
 
 const graphic = document.querySelector('#graphic');
 

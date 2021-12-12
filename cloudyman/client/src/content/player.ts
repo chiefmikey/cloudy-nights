@@ -1,13 +1,13 @@
-import { GameObj } from 'kaboom';
+import { GameObj, KaboomCtx, Vec2 } from 'kaboom';
 
 import K from '../functions/init';
 
-import { talk, cloudyTalk } from './talking.js';
+import { talk, cloudyTalk } from './talking';
 
-interface PlayerType {
+interface PlayerType extends GameObj {
   overlaps?: (name: string, callback?: (key?: GameObj) => void) => void;
-  action?: (callback: () => void) => void;
   resolve?: () => void;
+  move?: (input: Vec2) => void;
 }
 
 const playerOne = () => {
@@ -40,17 +40,21 @@ const playerOne = () => {
     }
   });
 
-  player.overlaps('ch1', (ch) => {
+  interface CharType extends GameObj {
+    msg: string;
+  }
+
+  player.overlaps('ch1', (ch: CharType) => {
     K.play('aaa');
     talk(ch.msg);
   });
 
-  player.overlaps('ch2', (ch) => {
+  player.overlaps('ch2', (ch: CharType) => {
     K.play('haha');
     talk(ch.msg);
   });
 
-  player.overlaps('cloudyman', (ch) => {
+  player.overlaps('cloudyman', (ch: CharType) => {
     K.play('ayy');
     cloudyTalk(ch.msg);
     finalDoor = true;

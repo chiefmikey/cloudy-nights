@@ -1,4 +1,4 @@
-import { getSpeed } from '../controls/speed.js';
+import { getSpeed } from '../controls/speed';
 
 let intervals = [];
 

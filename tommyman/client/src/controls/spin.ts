@@ -1,6 +1,6 @@
-import { tommyman } from '../elements/tommyman.js';
+import { tommyman } from '../elements/tommyman';
 
-import { getSpeed } from './speed.js';
+import { getSpeed } from './speed';
 
 export const spinLeft = () => {
   const speed = getSpeed();
