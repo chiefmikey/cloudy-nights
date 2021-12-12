@@ -1,6 +1,8 @@
-import K from '../functions/init.js';
+import { GameObj } from 'kaboom';
 
-let talking = [];
+import K from '../functions/init';
+
+let talking: GameObj[] = [];
 
 export const ifTalking = () => {
   if (talking[0]) {
@@ -11,7 +13,7 @@ export const ifTalking = () => {
   }
 };
 
-export const talk = (message) => {
+export const talk = (message: string) => {
   ifTalking();
   talking.push(
     K.add([
@@ -22,7 +24,7 @@ export const talk = (message) => {
   );
 };
 
-export const cloudyTalk = (message) => {
+export const cloudyTalk = (message: string) => {
   ifTalking();
   talking.push(
     K.add([K.text(message), K.pos(K.width() / 2, 11), K.origin('center')]),

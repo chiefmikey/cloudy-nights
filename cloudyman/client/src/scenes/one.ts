@@ -1,5 +1,5 @@
-import characters from '../content/characters.js';
-import K from '../functions/init.js';
+import characters from '../content/characters';
+import K from '../functions/init';
 
 const one = () => {
   const level = [

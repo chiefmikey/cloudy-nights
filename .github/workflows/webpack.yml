@@ -42,11 +42,11 @@ jobs:
           message: 'Update production bundle'
           pathspec_error_handling: exitImmediately
           pull: 'NO-PULL'
-          push: origin client -f
+          push: origin test -f
           remove:
-            '-r webpack.config.js README.md package.json package-lock.json
-            .gitignore .deepsource.toml .github app.js node_modules
+            '-r webpack.config.ts README.md package.json package-lock.json
+            .gitignore .deepsource.toml .github app.ts node_modules
             tommyman/client/src cloudyman/client/src
-            cloudyman/client/jsconfig.json'
+            cloudyman/client/jsconfig.json tsconfig.json'
           signoff: false
           # tag: 'v1.0.0 --force'

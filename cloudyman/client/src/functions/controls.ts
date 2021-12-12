@@ -1,12 +1,12 @@
-import playerOne from '../content/player.js';
-import { ifTalking } from '../content/talking.js';
+import playerOne from '../content/player';
+import { ifTalking } from '../content/talking';
 
-import K from './init.js';
-import './zoom.js';
+import K from './init';
+import './zoom';
 
 let getMoving = () => {};
 let isDown = false;
-let direction;
+let direction: string;
 let timer;
 let sound = false;
 
@@ -39,7 +39,7 @@ const controls = () => {
   };
 };
 
-const playerMove = (event) => {
+const playerMove = (event: MouseEvent) => {
   event.preventDefault();
   // eslint-disable-next-line no-param-reassign
   event.returnValue = false;
@@ -47,10 +47,10 @@ const playerMove = (event) => {
     event.type !== 'mouseup' &&
     event.type !== 'touchend' &&
     event.type !== 'touchcancel' &&
-    (event.target.id === 'up' ||
-      event.target.id === 'right' ||
-      event.target.id === 'down' ||
-      event.target.id === 'left')
+    ((event.target as Element).id === 'up' ||
+      (event.target as Element).id === 'right' ||
+      (event.target as Element).id === 'down' ||
+      (event.target as Element).id === 'left')
   ) {
     if (
       event.buttons === 1 ||
@@ -60,7 +60,9 @@ const playerMove = (event) => {
     ) {
       clearInterval(timer);
       isDown = true;
-      direction = event.target.id;
+      if (event.target.id) {
+        direction = event.target.id;
+      }
       getMoving();
     }
   } else {
@@ -69,14 +71,15 @@ const playerMove = (event) => {
   }
 };
 
-const blackScreen = document.querySelector('#blackScreen');
-const title = document.querySelector('#title');
+const blackScreen: HTMLElement = document.querySelector('#blackScreen');
+const title: HTMLElement = document.querySelector('#title');
 
 const touchStart = () => {
   if (!sound && getComputedStyle(title).opacity === '1') {
     K.play('coin');
     sound = true;
-    document.querySelector('#controls').style.pointerEvents = 'all';
+    (document.querySelector('#controls') as HTMLElement).style.pointerEvents =
+      'all';
     blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
     title.style.animation = 'fadeOut .2s linear 0s forwards';
     controls();

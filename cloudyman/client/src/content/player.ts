@@ -1,9 +1,17 @@
-import K from '../functions/init.js';
+import { GameObj } from 'kaboom';
+
+import K from '../functions/init';
 
 import { talk, cloudyTalk } from './talking.js';
 
+interface PlayerType {
+  overlaps?: (name: string, callback?: (key?: GameObj) => void) => void;
+  action?: (callback: () => void) => void;
+  resolve?: () => void;
+}
+
 const playerOne = () => {
-  const player = K.get('playerOne')[0];
+  const player: PlayerType = K.get('playerOne')[0];
 
   let hasKey = false;
 
