@@ -42,7 +42,7 @@ jobs:
           message: 'Update production bundle'
           pathspec_error_handling: exitImmediately
           pull: 'NO-PULL'
-          push: origin test -f
+          push: origin client -f
           remove:
             '-r webpack.config.ts README.md package.json package-lock.json
             .gitignore .deepsource.toml .github app.ts node_modules
