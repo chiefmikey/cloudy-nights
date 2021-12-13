@@ -45,8 +45,6 @@ const controls = () => {
 
 const playerMove = (event: MouseEvent) => {
   event.preventDefault();
-  // eslint-disable-next-line no-param-reassign
-  event.returnValue = false;
   if (
     event.type !== 'mouseup' &&
     event.type !== 'touchend' &&

@@ -31,7 +31,7 @@ jobs:
       - name: Add and Commit
         uses: EndBug/add-and-commit@v7
         with:
-          add: './public/dist --force'
+          add: '. --force'
           # author_name: Mikl Wolfe
           # author_email: wolfemikl@gmail.com
           # branch: client
@@ -42,7 +42,7 @@ jobs:
           message: 'Update production bundle'
           pathspec_error_handling: exitImmediately
           pull: 'NO-PULL'
-          push: origin HEAD:client --force
+          push: origin HEAD:client -f
           remove:
             '-r webpack.config.ts README.md package.json package-lock.json
             .gitignore .deepsource.toml .github app.ts node_modules

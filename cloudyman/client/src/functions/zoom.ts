@@ -2,20 +2,29 @@ let isZoomed = false;
 
 const zoom = () => {
   if (!isZoomed) {
-    document.querySelector('#body').style.justifyContent = 'flex-start';
-    document.querySelector('#app').style.justifyContent = 'flex-start';
-    document.querySelector('#app').style.height = '190%';
-    document.querySelector('#zoom').style.visibility = 'visible';
-    document.querySelector('#title').style.transform = 'scale(2.1)';
-    document.querySelector('#background').style.maxWidth = 'none';
+    (document.querySelector('#body') as HTMLElement).style.justifyContent =
+      'flex-start';
+    (document.querySelector('#app') as HTMLElement).style.justifyContent =
+      'flex-start';
+    (document.querySelector('#app') as HTMLElement).style.height = '190%';
+    (document.querySelector('#zoom') as HTMLElement).style.visibility =
+      'visible';
+    (document.querySelector('#title') as HTMLElement).style.transform =
+      'scale(2.1)';
+    (document.querySelector('#background') as HTMLElement).style.maxWidth =
+      'none';
     isZoomed = true;
   } else {
-    document.querySelector('#body').style.justifyContent = 'center';
-    document.querySelector('#app').style.justifyContent = 'center';
-    document.querySelector('#app').style.height = '100%';
-    document.querySelector('#zoom').style.visibility = '';
-    document.querySelector('#title').style.transform = 'scale(1)';
-    document.querySelector('#background').style.maxWidth = '100%';
+    (document.querySelector('#body') as HTMLElement).style.justifyContent =
+      'center';
+    (document.querySelector('#app') as HTMLElement).style.justifyContent =
+      'center';
+    (document.querySelector('#app') as HTMLElement).style.height = '100%';
+    (document.querySelector('#zoom') as HTMLElement).style.visibility = '';
+    (document.querySelector('#title') as HTMLElement).style.transform =
+      'scale(1)';
+    (document.querySelector('#background') as HTMLElement).style.maxWidth =
+      '100%';
     isZoomed = false;
   }
 };
@@ -44,6 +53,6 @@ if (document.addEventListener) {
     ) {
       zoom();
     }
-    window.event.returnValue = false;
+    window.event.preventDefault();
   });
 }

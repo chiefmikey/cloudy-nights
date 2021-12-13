@@ -1,4 +1,4 @@
-import { GameObj, KaboomCtx, Vec2 } from 'kaboom';
+import { GameObj, Vec2 } from 'kaboom';
 
 import K from '../functions/init';
 
