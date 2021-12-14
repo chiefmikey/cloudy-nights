@@ -3,83 +3,89 @@ import { tommySize } from '../elements/tommyman';
 import addInterval from '../helpers/interval';
 import setPosition from '../helpers/position';
 import print from '../helpers/print';
-import random from '../helpers/random';
+import { randomTimer, randomKey } from '../helpers/random';
 
 import { allNoises, allWords } from './audio';
 import move from './move';
 import { slowDown, speedUp } from './speed';
 import { spinLeft, spinRight } from './spin';
 
-let allRights;
-let allLefts;
-let allUps;
-let allDowns;
+let allRights: (() => () => NodeJS.Timer)[] = [];
+let allLefts: (() => () => NodeJS.Timer)[] = [];
+let allUps: (() => () => NodeJS.Timer)[] = [];
+let allDowns: (() => () => NodeJS.Timer)[] = [];
 
 const aRight = () => {
-  allRights = [goRight, goRightUp, goRightDown];
-  return random(allRights);
+  return randomTimer(allRights);
 };
 
 const aLeft = () => {
-  allLefts = [goLeft, goLeftUp, goLeftDown];
-  return random(allLefts);
+  return randomTimer(allLefts);
 };
 
 const aUp = () => {
-  allUps = [goUp, goLeftUp, goRightUp];
-  return random(allUps);
+  return randomTimer(allUps);
 };
 
 const aDown = () => {
-  allDowns = [goDown, goLeftDown, goRightDown];
-  return random(allDowns);
+  return randomTimer(allDowns);
 };
 
-const hitsWall = async (left: number, bottom: number) => {
-  const randomNoise =
-    allNoises[
-      ((allNoises.length - 1) * Math.random()).toFixed(
-        0,
-      ) as keyof typeof allNoises
-    ];
-  if (left <= 0) {
-    await (randomNoise as HTMLAudioElement).play();
-    print(left, bottom);
-    addInterval(aRight()());
-    slowDown();
-    return true;
+const hitsWall = async (left: number, bottom: number): Promise<boolean> => {
+  try {
+    const index = () =>
+      Number(((allNoises.length - 1) * Math.random()).toFixed(0));
+    const randomNoise = allNoises[index()];
+    if (left <= 0) {
+      await randomNoise.play();
+      print(left, bottom);
+      addInterval(aRight()());
+      slowDown();
+      return true;
+    }
+    if (
+      bodySize.width &&
+      bodySize.height &&
+      tommySize.width &&
+      tommySize.height
+    ) {
+      if (left >= bodySize.width - tommySize.width) {
+        await randomNoise.play();
+        print(left, bottom);
+        addInterval(aLeft()());
+        slowDown();
+        return true;
+      }
+      if (bottom <= 0) {
+        await randomNoise.play();
+        print(left, bottom);
+        addInterval(aUp()());
+        slowDown();
+        return true;
+      }
+      if (bottom >= bodySize.height - tommySize.height) {
+        await randomNoise.play();
+        print(left, bottom);
+        addInterval(aDown()());
+        slowDown();
+        return true;
+      }
+    }
+    return false;
+  } catch (error) {
+    console.error(error);
+    return false;
   }
-  if (left >= bodySize.width - tommySize.width) {
-    await (randomNoise as HTMLAudioElement).play();
-    print(left, bottom);
-    addInterval(aLeft()());
-    slowDown();
-    return true;
-  }
-  if (bottom <= 0) {
-    await (randomNoise as HTMLAudioElement).play();
-    print(left, bottom);
-    addInterval(aUp()());
-    slowDown();
-    return true;
-  }
-  if (bottom >= bodySize.height - tommySize.height) {
-    await (randomNoise as HTMLAudioElement).play();
-    print(left, bottom);
-    addInterval(aDown()());
-    slowDown();
-    return true;
-  }
-  return false;
 };
 
 const goLeft = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       spinLeft();
       // move(-1, 0);
       const pos = setPosition(-1, 0);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinLeft();
         move(pos.left, pos.bottom);
       }
@@ -88,9 +94,10 @@ const goLeft = () => {
 
 const goLeftUp = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(-1, 1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinLeft();
         move(pos.left, pos.bottom);
       }
@@ -98,29 +105,34 @@ const goLeftUp = () => {
 };
 const goLeftDown = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(-1, -1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinLeft();
         move(pos.left, pos.bottom);
       }
     }, 1);
 };
+
 const goRight = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(1, 0);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinRight();
         move(pos.left, pos.bottom);
       }
     }, 1);
 };
+
 const goRightUp = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(1, 1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinRight();
         move(pos.left, pos.bottom);
       }
@@ -128,9 +140,10 @@ const goRightUp = () => {
 };
 const goRightDown = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(1, -1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinRight();
         move(pos.left, pos.bottom);
       }
@@ -138,9 +151,10 @@ const goRightDown = () => {
 };
 const goUp = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(0, 1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinLeft();
         move(pos.left, pos.bottom);
       }
@@ -148,14 +162,20 @@ const goUp = () => {
 };
 const goDown = () => {
   return () =>
-    setInterval(() => {
+    (setInterval as IntervalType)(async () => {
       const pos = setPosition(0, -1);
-      if (!hitsWall(pos.left, pos.bottom)) {
+      const wall = await hitsWall(pos.left, pos.bottom);
+      if (!wall) {
         spinRight();
         move(pos.left, pos.bottom);
       }
     }, 1);
 };
+
+allRights = [goRight, goRightUp, goRightDown];
+allLefts = [goLeft, goLeftUp, goLeftDown];
+allUps = [goUp, goLeftUp, goRightUp];
+allDowns = [goDown, goLeftDown, goRightDown];
 
 export const allDirections = {
   left: goLeft,
@@ -189,7 +209,7 @@ export const randomBounce = async (
   }
   const directionKeys = Object.keys(allDirections);
   addInterval(
-    allDirections[random(directionKeys) as keyof typeof allDirections](),
+    allDirections[randomKey(directionKeys) as keyof typeof allDirections](),
   );
   speedUp();
 };

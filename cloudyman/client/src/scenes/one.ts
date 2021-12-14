@@ -1,7 +1,5 @@
-import { SolidComp, SpriteComp } from 'kaboom';
-
 import characters from '../content/characters';
-import K from '../functions/init';
+import { K } from '../functions/init';
 
 const one = () => {
   const level = [
@@ -22,9 +20,6 @@ const one = () => {
     '===============',
   ];
 
-  type CharType = { sprite: string; msg: string };
-  type AnyType = [SpriteComp, SolidComp, string, { msg: string }] | CharType;
-
   K.addLevel(level, {
     width: 11,
     height: 11,
@@ -33,8 +28,8 @@ const one = () => {
     $: [K.sprite('key'), 'key'],
     '@': [K.sprite('guy'), 'playerOne'],
     '|': [K.sprite('door'), K.solid(), 'door1'],
-    any(ch): AnyType {
-      const char: CharType = characters[ch as keyof typeof characters];
+    any(ch) {
+      const char = characters[ch as keyof typeof characters];
       if (char) {
         return [
           K.sprite(char.sprite),

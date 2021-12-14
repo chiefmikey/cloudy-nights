@@ -1,27 +1,29 @@
-import { GameObj, Vec2 } from 'kaboom';
+import { GameObj } from 'kaboom';
 
-import K from '../functions/init';
+import { K } from '../functions/init';
 
 import { talk, cloudyTalk } from './talking';
 
-interface PlayerType extends GameObj {
-  overlaps?: (name: string, callback?: (key?: GameObj) => void) => void;
-  resolve?: () => void;
-  move?: (input: Vec2) => void;
-}
+type PlayerOverlapsType = (
+  input: string,
+  callback: (key: GameObj) => void,
+) => void;
 
 const playerOne = () => {
-  const player: PlayerType = K.get('playerOne')[0];
+  const player = K.get('playerOne')[0];
+  const onOverlap = player.overlaps as PlayerOverlapsType;
 
   let hasKey = false;
 
-  player.overlaps('key', (key) => {
+  onOverlap('key', (key) => {
     K.play('coin');
-    K.destroy(key);
+    if (key) {
+      K.destroy(key);
+    }
     hasKey = true;
   });
 
-  player.overlaps('door1', () => {
+  onOverlap('door1', () => {
     if (hasKey) {
       K.play('hit');
       K.go('two');
@@ -32,7 +34,7 @@ const playerOne = () => {
 
   let finalDoor = false;
 
-  player.overlaps('finalDoor', () => {
+  onOverlap('finalDoor', () => {
     if (finalDoor) {
       K.go('win');
     } else {
@@ -40,28 +42,30 @@ const playerOne = () => {
     }
   });
 
-  interface CharType extends GameObj {
-    msg: string;
-  }
-
-  player.overlaps('ch1', (ch: CharType) => {
+  onOverlap('ch1', (ch) => {
     K.play('aaa');
-    talk(ch.msg);
+    if (ch && typeof ch.msg === 'string') {
+      talk(ch.msg);
+    }
   });
 
-  player.overlaps('ch2', (ch: CharType) => {
+  onOverlap('ch2', (ch) => {
     K.play('haha');
-    talk(ch.msg);
+    if (ch && typeof ch.msg === 'string') {
+      talk(ch.msg);
+    }
   });
 
-  player.overlaps('cloudyman', (ch: CharType) => {
+  onOverlap('cloudyman', (ch) => {
     K.play('ayy');
-    cloudyTalk(ch.msg);
+    if (ch && typeof ch.msg === 'string') {
+      cloudyTalk(ch.msg);
+    }
     finalDoor = true;
   });
 
   player.action(() => {
-    player.resolve();
+    (player.resolve as () => void)();
   });
 
   return player;

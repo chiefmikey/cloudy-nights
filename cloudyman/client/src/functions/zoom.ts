@@ -29,30 +29,30 @@ const zoom = () => {
   }
 };
 
-document.querySelector('#zoom').addEventListener('click', zoom);
+document.querySelector('#zoom')?.addEventListener('click', zoom);
 
 if (document.addEventListener) {
   document.addEventListener(
     'contextmenu',
     (event_) => {
-      if (
-        window.getComputedStyle(document.querySelector('#zoom')).visibility ===
-        'visible'
-      ) {
-        zoom();
+      const zoomElement = document.querySelector('#zoom');
+      if (zoomElement) {
+        if (window.getComputedStyle(zoomElement).visibility === 'visible') {
+          zoom();
+        }
+        event_.preventDefault();
       }
-      event_.preventDefault();
     },
     false,
   );
 } else {
-  document.attachEvent('oncontextmenu', () => {
+  (document as EventAttachType).attachEvent('oncontextmenu', () => {
+    const zoomElement = document.querySelector('#zoom');
     if (
-      window.getComputedStyle(document.querySelector('#zoom')).visibility ===
-      'visible'
+      zoomElement &&
+      window.getComputedStyle(zoomElement).visibility === 'visible'
     ) {
       zoom();
     }
-    window.event.preventDefault();
   });
 }

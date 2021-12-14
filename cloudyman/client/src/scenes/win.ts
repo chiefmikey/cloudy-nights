@@ -1,4 +1,4 @@
-import K from '../functions/init';
+import { K } from '../functions/init';
 
 const win = () => {
   K.play('priorities');

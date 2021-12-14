@@ -8,10 +8,14 @@ let first = true;
 let touching = false;
 let triggered = true;
 
-const mouseMove = () => {
-  randomBounce(touching, triggered, first);
+const mouseMove = async () => {
+  await randomBounce(touching, triggered, first);
   triggered = true;
   touching = true;
+};
+
+const touchStart = async () => {
+  await randomBounce(touching, triggered, first);
 };
 
 const touchEnd = () => {
@@ -19,25 +23,31 @@ const touchEnd = () => {
   triggered = false;
 };
 
-const firstClick = () => {
+const firstClick = async () => {
   if (first) {
-    allAudio.beginning.play();
-    tommyman?.addEventListener('mousemove', mouseMove);
-    tommyman?.addEventListener('mouseenter', mouseMove);
-    tommyman?.addEventListener(
+    await allAudio.beginning.play();
+    (tommyman?.addEventListener as EventListenerType)('mousemove', mouseMove);
+    (tommyman?.addEventListener as EventListenerType)('mouseenter', mouseMove);
+    (tommyman?.addEventListener as EventListenerType)(
       'touchstart',
-      randomBounce(touching, triggered, first),
-      { passive: true },
+      touchStart,
+      {
+        passive: true,
+      },
     );
     tommyman?.addEventListener('touchend', touchEnd);
     tommyman?.addEventListener('mouseout', touchEnd);
-    tommyman?.addEventListener('touchmove', mouseMove, { passive: true });
-    body?.addEventListener('touchmove', mouseMove, { passive: true });
+    (tommyman?.addEventListener as EventListenerType)('touchmove', mouseMove, {
+      passive: true,
+    });
+    (body?.addEventListener as EventListenerType)('touchmove', mouseMove, {
+      passive: true,
+    });
     body?.addEventListener('touchend', touchEnd);
     first = false;
   }
   touching = true;
-  randomBounce(touching, triggered, first);
+  await randomBounce(touching, triggered, first);
 };
 
-tommyman?.addEventListener('click', firstClick);
+(tommyman?.addEventListener as EventListenerType)('click', firstClick);

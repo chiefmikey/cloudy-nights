@@ -1,7 +1,9 @@
+import { Vec2, Key } from 'kaboom';
+
 import playerOne from '../content/player';
 import { ifTalking } from '../content/talking';
 
-import K from './init';
+import { K } from './init';
 import './zoom';
 
 let getMoving = () => {};
@@ -21,11 +23,11 @@ const controls = () => {
     down: K.vec2(0, 1),
   };
 
-  const directionKeys = Object.keys(allDirections);
+  const directionKeys = Object.keys(allDirections) as Key[];
   for (const key of directionKeys) {
     K.keyPress(key, ifTalking);
     K.keyDown(key, () => {
-      player.move(
+      (player.move as (input: Vec2) => void)(
         allDirections[key as keyof typeof allDirections].scale(SPEED),
       );
     });
@@ -35,7 +37,7 @@ const controls = () => {
     ifTalking();
     timer = setInterval(() => {
       if (isDown) {
-        player.move(
+        (player.move as (input: Vec2) => void)(
           allDirections[direction as keyof typeof allDirections].scale(SPEED),
         );
       }
@@ -43,7 +45,7 @@ const controls = () => {
   };
 };
 
-const playerMove = (event: MouseEvent) => {
+const playerMove = (event: MouseEvent | TouchEvent) => {
   event.preventDefault();
   if (
     event.type !== 'mouseup' &&
@@ -55,8 +57,8 @@ const playerMove = (event: MouseEvent) => {
       (event.target as Element).id === 'left')
   ) {
     if (
-      event.buttons === 1 ||
-      event.buttons === 3 ||
+      // event.buttons === 1 ||
+      // event.buttons === 3 ||
       event.type === 'touchstart' ||
       event.type === 'touchmove'
     ) {
@@ -73,25 +75,29 @@ const playerMove = (event: MouseEvent) => {
   }
 };
 
-const blackScreen: HTMLElement = document.querySelector('#blackScreen');
-const title: HTMLElement = document.querySelector('#title');
+const blackScreen: HTMLElement | null = document.querySelector('#blackScreen');
+const title: HTMLElement | null = document.querySelector('#title');
 
 const touchStart = () => {
-  if (!sound && getComputedStyle(title).opacity === '1') {
+  if (!sound && getComputedStyle(title as Element).opacity === '1') {
     K.play('coin');
     sound = true;
     (document.querySelector('#controls') as HTMLElement).style.pointerEvents =
       'all';
-    blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
-    title.style.animation = 'fadeOut .2s linear 0s forwards';
+    if (blackScreen && title) {
+      blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
+      title.style.animation = 'fadeOut .2s linear 0s forwards';
+    }
     controls();
   }
 };
 
-blackScreen.addEventListener('mousedown', touchStart);
-blackScreen.addEventListener('touchstart', touchStart, { passive: true });
-title.addEventListener('mousedown', touchStart);
-title.addEventListener('touchstart', touchStart, { passive: true });
+if (blackScreen && title) {
+  blackScreen.addEventListener('mousedown', touchStart);
+  blackScreen.addEventListener('touchstart', touchStart, { passive: true });
+  title.addEventListener('mousedown', touchStart);
+  title.addEventListener('touchstart', touchStart, { passive: true });
+}
 
 document.addEventListener('mousedown', playerMove);
 document.addEventListener('mouseup', playerMove);
