@@ -10,6 +10,69 @@ import move from './move';
 import { slowDown, speedUp } from './speed';
 import { spinLeft, spinRight } from './spin';
 
+let allRights;
+let allLefts;
+let allUps;
+let allDowns;
+
+const aRight = () => {
+  allRights = [goRight, goRightUp, goRightDown];
+  return random(allRights);
+};
+
+const aLeft = () => {
+  allLefts = [goLeft, goLeftUp, goLeftDown];
+  return random(allLefts);
+};
+
+const aUp = () => {
+  allUps = [goUp, goLeftUp, goRightUp];
+  return random(allUps);
+};
+
+const aDown = () => {
+  allDowns = [goDown, goLeftDown, goRightDown];
+  return random(allDowns);
+};
+
+const hitsWall = async (left: number, bottom: number) => {
+  const randomNoise =
+    allNoises[
+      ((allNoises.length - 1) * Math.random()).toFixed(
+        0,
+      ) as keyof typeof allNoises
+    ];
+  if (left <= 0) {
+    await (randomNoise as HTMLAudioElement).play();
+    print(left, bottom);
+    addInterval(aRight()());
+    slowDown();
+    return true;
+  }
+  if (left >= bodySize.width - tommySize.width) {
+    await (randomNoise as HTMLAudioElement).play();
+    print(left, bottom);
+    addInterval(aLeft()());
+    slowDown();
+    return true;
+  }
+  if (bottom <= 0) {
+    await (randomNoise as HTMLAudioElement).play();
+    print(left, bottom);
+    addInterval(aUp()());
+    slowDown();
+    return true;
+  }
+  if (bottom >= bodySize.height - tommySize.height) {
+    await (randomNoise as HTMLAudioElement).play();
+    print(left, bottom);
+    addInterval(aDown()());
+    slowDown();
+    return true;
+  }
+  return false;
+};
+
 const goLeft = () => {
   return () =>
     setInterval(() => {
@@ -94,76 +157,6 @@ const goDown = () => {
     }, 1);
 };
 
-const aRight = () => {
-  const allRights = [goRight, goRightUp, goRightDown];
-  return random(allRights);
-};
-
-const aLeft = () => {
-  const allLefts = [goLeft, goLeftUp, goLeftDown];
-  return random(allLefts);
-};
-
-const aUp = () => {
-  const allUps = [goUp, goLeftUp, goRightUp];
-  return random(allUps);
-};
-
-const aDown = () => {
-  const allDowns = [goDown, goLeftDown, goRightDown];
-  return random(allDowns);
-};
-
-const hitsWall = (left, bottom) => {
-  const randomNoise =
-    allNoises[((allNoises.length - 1) * Math.random()).toFixed(0)];
-  if (left <= 0) {
-    randomNoise.play();
-    print(left, bottom);
-    addInterval(aRight()());
-    slowDown();
-    return true;
-  }
-  if (left >= bodySize.width - tommySize.width) {
-    randomNoise.play();
-    print(left, bottom);
-    addInterval(aLeft()());
-    slowDown();
-    return true;
-  }
-  if (bottom <= 0) {
-    randomNoise.play();
-    print(left, bottom);
-    addInterval(aUp()());
-    slowDown();
-    return true;
-  }
-  if (bottom >= bodySize.height - tommySize.height) {
-    randomNoise.play();
-    print(left, bottom);
-    addInterval(aDown()());
-    slowDown();
-    return true;
-  }
-  return false;
-};
-
-export const randomBounce = (touching, triggered, first) => {
-  const pos = setPosition(0, 0);
-  const randomWord =
-    allWords[((allWords.length - 1) * Math.random()).toFixed(0)];
-  if (!first && (!touching || (touching && !triggered))) {
-    randomWord.play();
-    print(pos.left, pos.bottom);
-  }
-  if (first) {
-    print(pos.left, pos.bottom);
-  }
-  const directionKeys = Object.keys(allDirections);
-  addInterval(allDirections[random(directionKeys)]());
-  speedUp();
-};
-
 export const allDirections = {
   left: goLeft,
   right: goRight,
@@ -173,4 +166,30 @@ export const allDirections = {
   rightUp: goRightUp,
   leftDown: goLeftDown,
   rightDown: goRightDown,
+};
+
+export const randomBounce = async (
+  touching: boolean,
+  triggered: boolean,
+  first: boolean,
+) => {
+  const pos = setPosition(0, 0);
+  const randomWord =
+    allWords[
+      ((allWords.length - 1) * Math.random()).toFixed(
+        0,
+      ) as keyof typeof allWords
+    ];
+  if (!first && (!touching || (touching && !triggered))) {
+    await (randomWord as HTMLAudioElement).play();
+    print(pos.left, pos.bottom);
+  }
+  if (first) {
+    print(pos.left, pos.bottom);
+  }
+  const directionKeys = Object.keys(allDirections);
+  addInterval(
+    allDirections[random(directionKeys) as keyof typeof allDirections](),
+  );
+  speedUp();
 };
