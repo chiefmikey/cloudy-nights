@@ -1,6 +1,6 @@
 import { getSpeed } from '../controls/speed';
 
-let intervals = [];
+let intervals: NodeJS.Timer[] = [];
 
 const clearAll = () => {
   for (const interval of intervals) {
@@ -9,7 +9,7 @@ const clearAll = () => {
   intervals = [];
 };
 
-const addInterval = (interval) => {
+const addInterval = (interval: () => NodeJS.Timer) => {
   clearAll();
   const speed = getSpeed();
   for (let index = 0; index < speed; index += 1) {
