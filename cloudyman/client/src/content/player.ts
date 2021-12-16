@@ -1,21 +1,10 @@
-import { GameObj } from 'kaboom';
-
 import { K } from '../functions/init';
 
 import { talk, cloudyTalk } from './talking';
 
-type PlayerOverlapsType = (
-  input: string,
-  callback: (key: GameObj) => void,
-) => void;
-
 const playerOne = () => {
-  const player = K.get('playerOne')[0];
-  const onOverlap = player.overlaps as PlayerOverlapsType;
-
   let hasKey = false;
-
-  onOverlap('key', (key) => {
+  K.onCollide('playerOne', 'key', (key) => {
     K.play('coin');
     if (key) {
       K.destroy(key);
@@ -23,7 +12,7 @@ const playerOne = () => {
     hasKey = true;
   });
 
-  onOverlap('door1', () => {
+  K.onCollide('playerOne', 'door1', () => {
     if (hasKey) {
       K.play('hit');
       K.go('two');
@@ -34,7 +23,7 @@ const playerOne = () => {
 
   let finalDoor = false;
 
-  onOverlap('finalDoor', () => {
+  K.onCollide('playerOne', 'finalDoor', () => {
     if (finalDoor) {
       K.go('win');
     } else {
@@ -42,32 +31,27 @@ const playerOne = () => {
     }
   });
 
-  onOverlap('ch1', (ch) => {
+  K.onCollide('playerOne', 'ch1', (ch) => {
     K.play('aaa');
     if (ch && typeof ch.msg === 'string') {
       talk(ch.msg);
     }
   });
 
-  onOverlap('ch2', (ch) => {
+  K.onCollide('playerOne', 'ch2', (ch) => {
     K.play('haha');
     if (ch && typeof ch.msg === 'string') {
       talk(ch.msg);
     }
   });
 
-  onOverlap('cloudyman', (ch) => {
+  K.onCollide('playerOne', 'cloudyman', (ch) => {
     K.play('ayy');
     if (ch && typeof ch.msg === 'string') {
       cloudyTalk(ch.msg);
     }
     finalDoor = true;
   });
-
-  player.action(() => {
-    (player.resolve as () => void)();
-  });
-
-  return player;
 };
+
 export default playerOne;

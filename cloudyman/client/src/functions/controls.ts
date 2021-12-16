@@ -1,6 +1,5 @@
 import { Vec2, Key } from 'kaboom';
 
-import playerOne from '../content/player';
 import { ifTalking } from '../content/talking';
 
 import { K } from './init';
@@ -13,7 +12,7 @@ let timer: NodeJS.Timer;
 let sound = false;
 
 const controls = () => {
-  const player = playerOne();
+  const player = K.get('playerOne')[0];
   const SPEED = 80;
 
   const allDirections = {
@@ -25,8 +24,8 @@ const controls = () => {
 
   const directionKeys = Object.keys(allDirections) as Key[];
   for (const key of directionKeys) {
-    K.keyPress(key, ifTalking);
-    K.keyDown(key, () => {
+    K.onKeyPress(key, ifTalking);
+    K.onKeyDown(key, () => {
       (player.move as (input: Vec2) => void)(
         allDirections[key as keyof typeof allDirections].scale(SPEED),
       );

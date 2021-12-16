@@ -6,6 +6,10 @@ const css = ['style-loader', 'css-loader'];
 const config: Configuration = {
   mode: 'development',
   entry: {
+    'public-bundle': {
+      import: './public/index.ts',
+      filename: 'public/dist/[name].js',
+    },
     'tommyman-bundle': {
       import: './tommyman/client/src/index.ts',
       filename: 'tommyman/client/public/dist/[name].js',

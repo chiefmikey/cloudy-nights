@@ -4,6 +4,8 @@ const canvasElement = document.querySelector('#game') as HTMLCanvasElement;
 
 export const K = kaboom({
   canvas: canvasElement,
+  background: [0, 0, 0, 1],
+  stretch: false,
   crisp: true,
   width: 205,
   height: 205,

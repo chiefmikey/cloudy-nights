@@ -1,4 +1,3 @@
-import { body } from '../elements/body';
 import { tommyman } from '../elements/tommyman';
 
 import { allAudio } from './audio';
@@ -8,26 +7,28 @@ let first = true;
 let touching = false;
 let triggered = true;
 
-const mouseMove = async () => {
-  await randomBounce(touching, triggered, first);
+const mouseMove = () => {
+  randomBounce(touching, triggered, first);
   triggered = true;
   touching = true;
 };
 
-const touchStart = async () => {
-  await randomBounce(touching, triggered, first);
-};
+const touchStart = () => randomBounce(touching, triggered, first);
 
 const touchEnd = () => {
   touching = false;
   triggered = false;
 };
 
-const firstClick = async () => {
+const firstClick = () => {
   if (first) {
-    await allAudio.beginning.play();
-    (tommyman?.addEventListener as EventListenerType)('mousemove', mouseMove);
+    allAudio.beginning.play();
     (tommyman?.addEventListener as EventListenerType)('mouseenter', mouseMove);
+    // (tommyman?.addEventListener as EventListenerType)('mouseenter', mouseMove);
+    (tommyman?.addEventListener as EventListenerType)('mouseover', mouseMove);
+    tommyman?.addEventListener('mouseleave', touchEnd);
+    // tommyman?.addEventListener('mouseout', touchEnd);
+    // tommyman?.addEventListener('touchend', touchEnd);
     (tommyman?.addEventListener as EventListenerType)(
       'touchstart',
       touchStart,
@@ -35,19 +36,17 @@ const firstClick = async () => {
         passive: true,
       },
     );
-    tommyman?.addEventListener('touchend', touchEnd);
-    tommyman?.addEventListener('mouseout', touchEnd);
     (tommyman?.addEventListener as EventListenerType)('touchmove', mouseMove, {
       passive: true,
     });
-    (body?.addEventListener as EventListenerType)('touchmove', mouseMove, {
-      passive: true,
-    });
-    body?.addEventListener('touchend', touchEnd);
+    // (body?.addEventListener as EventListenerType)('touchmove', mouseMove, {
+    //   passive: true,
+    // });
+    // body?.addEventListener('touchend', touchEnd);
     first = false;
   }
   touching = true;
-  await randomBounce(touching, triggered, first);
+  randomBounce(touching, triggered, first);
 };
 
 (tommyman?.addEventListener as EventListenerType)('click', firstClick);

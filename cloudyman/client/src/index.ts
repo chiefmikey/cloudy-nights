@@ -7,8 +7,8 @@ import two from './scenes/two';
 import win from './scenes/win';
 import './functions/controls';
 
-K?.scene('one', () => one());
-K?.scene('two', () => two());
-K?.scene('win', win);
+K.scene('one', one);
+K.scene('two', two);
+K.scene('win', win);
 
-(K?.start as (scene: string) => void)('one');
+one();
