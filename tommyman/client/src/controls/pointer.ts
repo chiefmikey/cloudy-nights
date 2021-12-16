@@ -23,23 +23,19 @@ const touchEnd = () => {
 const firstClick = () => {
   if (first) {
     allAudio.beginning.play();
-    (tommyman?.addEventListener as EventListenerType)('mouseenter', mouseMove);
-    // (tommyman?.addEventListener as EventListenerType)('mouseenter', mouseMove);
-    (tommyman?.addEventListener as EventListenerType)('mouseover', mouseMove);
+    tommyman?.addEventListener('mouseenter', mouseMove);
+    // tommyman?.addEventListener('mouseenter', mouseMove);
+    tommyman?.addEventListener('mouseover', mouseMove);
     tommyman?.addEventListener('mouseleave', touchEnd);
     // tommyman?.addEventListener('mouseout', touchEnd);
     // tommyman?.addEventListener('touchend', touchEnd);
-    (tommyman?.addEventListener as EventListenerType)(
-      'touchstart',
-      touchStart,
-      {
-        passive: true,
-      },
-    );
-    (tommyman?.addEventListener as EventListenerType)('touchmove', mouseMove, {
+    tommyman?.addEventListener('touchstart', touchStart, {
       passive: true,
     });
-    // (body?.addEventListener as EventListenerType)('touchmove', mouseMove, {
+    tommyman?.addEventListener('touchmove', mouseMove, {
+      passive: true,
+    });
+    // body?.addEventListener('touchmove', mouseMove, {
     //   passive: true,
     // });
     // body?.addEventListener('touchend', touchEnd);
@@ -49,4 +45,4 @@ const firstClick = () => {
   randomBounce(touching, triggered, first);
 };
 
-(tommyman?.addEventListener as EventListenerType)('click', firstClick);
+tommyman?.addEventListener('click', firstClick);
