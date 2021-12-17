@@ -46,6 +46,6 @@ jobs:
           remove:
             '-r webpack.config.ts README.md package.json package-lock.json
             .gitignore .deepsource.toml .github app.ts node_modules
-            tommyman/client/src cloudyman/client/src tsconfig.json'
+            tommyman/client/src cloudyman/client/src tsconfig.json index.d.ts'
           signoff: false
           # tag: 'v1.0.0 --force'
