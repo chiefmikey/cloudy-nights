@@ -56,8 +56,8 @@ const playerMove = (event: MouseEvent | TouchEvent) => {
       (event.target as Element).id === 'left')
   ) {
     if (
-      // event.buttons === 1 ||
-      // event.buttons === 3 ||
+      (event as MouseEvent).buttons === 1 ||
+      (event as MouseEvent).buttons === 3 ||
       event.type === 'touchstart' ||
       event.type === 'touchmove'
     ) {
