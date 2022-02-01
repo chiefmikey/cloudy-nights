@@ -22,10 +22,10 @@ const controls = () => {
     down: K.vec2(0, 1),
   };
 
-  const directionKeys = Object.keys(allDirections) as Key[];
+  const directionKeys = Object.keys(allDirections);
   for (const key of directionKeys) {
-    K.onKeyPress(key, ifTalking);
-    K.onKeyDown(key, () => {
+    K.onKeyPress(key as Key, ifTalking);
+    K.onKeyDown(key as Key, () => {
       (player.move as (input: Vec2) => void)(
         allDirections[key as keyof typeof allDirections].scale(SPEED),
       );
