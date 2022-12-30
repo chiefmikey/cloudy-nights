@@ -1,7 +1,19 @@
 let isZoomed = false;
 
 const zoom = () => {
-  if (!isZoomed) {
+  if (isZoomed) {
+    (document.querySelector('#body') as HTMLElement).style.justifyContent =
+      'center';
+    (document.querySelector('#app') as HTMLElement).style.justifyContent =
+      'center';
+    (document.querySelector('#app') as HTMLElement).style.height = '100%';
+    (document.querySelector('#zoom') as HTMLElement).style.visibility = '';
+    (document.querySelector('#title') as HTMLElement).style.transform =
+      'scale(1)';
+    (document.querySelector('#background') as HTMLElement).style.maxWidth =
+      '100%';
+    isZoomed = false;
+  } else {
     (document.querySelector('#body') as HTMLElement).style.justifyContent =
       'flex-start';
     (document.querySelector('#app') as HTMLElement).style.justifyContent =
@@ -14,18 +26,6 @@ const zoom = () => {
     (document.querySelector('#background') as HTMLElement).style.maxWidth =
       'none';
     isZoomed = true;
-  } else {
-    (document.querySelector('#body') as HTMLElement).style.justifyContent =
-      'center';
-    (document.querySelector('#app') as HTMLElement).style.justifyContent =
-      'center';
-    (document.querySelector('#app') as HTMLElement).style.height = '100%';
-    (document.querySelector('#zoom') as HTMLElement).style.visibility = '';
-    (document.querySelector('#title') as HTMLElement).style.transform =
-      'scale(1)';
-    (document.querySelector('#background') as HTMLElement).style.maxWidth =
-      '100%';
-    isZoomed = false;
   }
 };
 

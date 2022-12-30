@@ -1,4 +1,5 @@
 import path from 'node:path';
+
 import { Configuration } from 'webpack';
 
 const css = ['style-loader', 'css-loader'];
