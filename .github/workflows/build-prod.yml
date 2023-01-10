@@ -38,6 +38,8 @@ jobs:
           [ "${1}" != "./.git" ] &&
           [ "${1}" != "./docs" ] &&
           [ "${1}" != "./LICENSE" ] &&
+          [ "${1}" != "./tommyman/client/public" ] &&
+          [ "${1}" != "./cloudyman/client/public" ] &&
           [ "${1}" != "./README.md" ]; then
             rm -rf ${1}
           fi
