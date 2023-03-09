@@ -28,7 +28,7 @@
     "@types/webpack": "^5.28.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
-    "mikey-pro": "^6.3.0",
+    "mikey-pro": "^6.4.17",
     "nodemon": "^2.0.20",
     "source-map-js": "^1.0.2",
     "source-map-loader": "^4.0.1",
