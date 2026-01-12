@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "airbnb-browser-shims": "^3.3.0",
-    "kaboom": "^2000.2.10",
+    "kaboom": "^3000.1.17",
     "koa": "^2.14.1",
     "koa-static": "^5.0.0",
     "path": "^0.12.7",
