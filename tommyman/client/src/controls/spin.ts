@@ -1,5 +1,4 @@
 import { tommyman } from '../elements/tommyman';
-
 import { getSpeed } from './speed';
 
 export const spinLeft = () => {

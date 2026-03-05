@@ -19,7 +19,7 @@ const print = (left: number, bottom: number) => {
     360 * Math.random()
   }deg)`;
   if (tommyman) {
-    svg.style.transform = `${tommyman.style.transform}`;
+    svg.style.transform = tommyman.style.transform;
   }
   allPrints.push(svg);
   if (graphic) {

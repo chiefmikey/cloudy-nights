@@ -1,6 +1,5 @@
 import { K } from '../functions/init';
-
-import { talk, cloudyTalk } from './talking';
+import { cloudyTalk, talk } from './talking';
 
 const playerOne = () => {
   let hasKey = false;

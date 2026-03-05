@@ -1,18 +1,18 @@
 import kaboom from 'kaboom';
 
-const canvasElement = document.querySelector('#game') as HTMLCanvasElement;
+const canvasElement = document.querySelector('#game')!;
 
 export const K = kaboom({
-  canvas: canvasElement,
   background: [0, 0, 0, 1],
-  stretch: false,
+  canvas: canvasElement,
   crisp: true,
-  width: 205,
-  height: 205,
-  scale: 1,
   debug: false,
   global: false,
+  height: 205,
   plugins: [],
+  scale: 1,
+  stretch: false,
+  width: 205,
 });
 
 const assetLoader = async () => {

@@ -1,6 +1,7 @@
 {
   "name": "cloudy-nights",
   "version": "1.0.1",
+  "type": "module",
   "description": "It's a cloudy night...",
   "main": "app.ts",
   "scripts": {
@@ -28,7 +29,8 @@
     "@types/webpack": "^5.28.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
-    "mikey-pro": "^6.3.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "mikey-pro": "^10.1.0",
     "nodemon": "^2.0.20",
     "source-map-js": "^1.0.2",
     "source-map-loader": "^4.0.1",
@@ -58,14 +60,9 @@
     "itsacloudynight"
   ],
   "author": "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)",
-  "contributors": [
-    "Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"
-  ],
-  "prettier": "@mikey-pro/prettier-config",
-  "eslintConfig": {
-    "extends": "@mikey-pro/eslint-config"
-  },
+  "contributors": ["Mikl Wolfe <wolfe@mikl.io> (https://mikl.io)"],
+  "prettier": "mikey-pro/prettier",
   "stylelint": {
-    "extends": "@mikey-pro/stylelint-config"
+    "extends": "mikey-pro/stylelint"
   }
 }

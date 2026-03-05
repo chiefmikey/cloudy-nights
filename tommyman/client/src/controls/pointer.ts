@@ -1,5 +1,4 @@
 import { tommyman } from '../elements/tommyman';
-
 import { allAudio } from './audio';
 import { randomBounce } from './direction';
 

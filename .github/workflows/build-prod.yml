@@ -13,44 +13,46 @@ jobs:
       contents: write
 
     steps:
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 'latest'
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
 
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.DISPATCH_WORKFLOW }}
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.DISPATCH_WORKFLOW }}
 
-    - name: Webpack
-      run: |
-        npm install
-        NODE_ENV=production webpack --mode production
+      - name: Webpack
+        run: |
+          npm install
+          NODE_ENV=production webpack --mode production
 
-    - name: Prune Files
-      run : |
-        prune() {
-          echo "Remove: ${1}"
-          if
-          [ "${1}" != "." ] &&
-          [ "${1}" != ".." ] &&
-          [ "${1}" != "./.git" ] &&
-          [ "${1}" != "./docs" ] &&
-          [ "${1}" != "./LICENSE" ] &&
-          [ "${1}" != "./tommyman/client/public" ] &&
-          [ "${1}" != "./cloudyman/client/public" ] &&
-          [ "${1}" != "./README.md" ]; then
-            rm -rf ${1}
-          fi
-        }
-        export -f prune
-        find . -maxdepth 1 | while read file; do prune ${file}; done
+      - name: Prune Files
+        run: |
+          cp docs/index.html docs/cloudyman.html docs/tommyman.html docs/404.html .
+          cp docs/CNAME .
 
-    - name: Push Client
-      run: |
-        git config user.name "chiefmikey"
-        git config user.email "wolfemikl@gmail.com"
-        git add .
-        git commit -am 'Update production build'
-        git push -fu origin HEAD:client
+          mkdir -p /tmp/keep
+          cp -r public /tmp/keep/public
+          cp -r tommyman/client/public /tmp/keep/tommyman-client-public
+          cp -r cloudyman/client/public /tmp/keep/cloudyman-client-public
+
+          find . -maxdepth 1 ! -name '.' ! -name '.git' \
+            ! -name 'index.html' ! -name 'cloudyman.html' \
+            ! -name 'tommyman.html' ! -name '404.html' \
+            ! -name 'CNAME' ! -name 'LICENSE' ! -name 'README.md' \
+            -exec rm -rf {} \;
+
+          mv /tmp/keep/public .
+          mkdir -p tommyman/client && mv /tmp/keep/tommyman-client-public tommyman/client/public
+          mkdir -p cloudyman/client && mv /tmp/keep/cloudyman-client-public cloudyman/client/public
+          rm -rf /tmp/keep
+
+      - name: Push Client
+        run: |
+          git config user.name "chiefmikey"
+          git config user.email "wolfemikl@gmail.com"
+          git add .
+          git commit -am 'Update production build'
+          git push -fu origin HEAD:client

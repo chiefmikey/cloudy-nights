@@ -3,8 +3,7 @@ import { tommySize } from '../elements/tommyman';
 import addInterval from '../helpers/interval';
 import setPosition from '../helpers/position';
 import print from '../helpers/print';
-import { randomTimer, randomKey } from '../helpers/random';
-
+import { randomKey, randomTimer } from '../helpers/random';
 import { allNoises, allWords } from './audio';
 import move from './move';
 import { slowDown, speedUp } from './speed';
@@ -198,12 +197,12 @@ export const randomBounce = (
 };
 
 export const allDirections = {
-  left: goLeft,
-  right: goRight,
-  up: goUp,
   down: goDown,
-  leftUp: goLeftUp,
-  rightUp: goRightUp,
+  left: goLeft,
   leftDown: goLeftDown,
+  leftUp: goLeftUp,
+  right: goRight,
   rightDown: goRightDown,
+  rightUp: goRightUp,
+  up: goUp,
 };

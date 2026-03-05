@@ -17,7 +17,7 @@ if (bodySize.width && tommySize.width && bodySize.height && tommySize.height) {
 const setPosition = (leftNumber: number, bottomNumber: number) => {
   left += leftNumber;
   bottom += bottomNumber;
-  return { left, bottom };
+  return { bottom, left };
 };
 
 export default setPosition;

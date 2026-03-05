@@ -1,5 +1,4 @@
-/* eslint-disable compat/compat */
-const AudioContext = window.AudioContext || window.webkitAudioContext;
+const AudioContext = globalThis.AudioContext || globalThis.webkitAudioContext;
 const context = new AudioContext();
 
 const beginning = new Audio(
@@ -31,6 +30,6 @@ const gnarlySource = context.createMediaElementSource(gnarly);
 gnarlySource.connect(context.destination);
 gnarly.volume = 0.8;
 
-export const allAudio = { beginning, cool, crazy, gnarly, d, ea, g };
+export const allAudio = { beginning, cool, crazy, d, ea, g, gnarly };
 export const allWords = [cool, crazy, gnarly];
 export const allNoises = [d, ea, g];

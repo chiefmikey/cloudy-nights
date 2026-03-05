@@ -1,4 +1,4 @@
-import { GameObj } from 'kaboom';
+import type { GameObj } from 'kaboom';
 
 import { K } from '../functions/init';
 

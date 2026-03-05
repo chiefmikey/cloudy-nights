@@ -1,9 +1,9 @@
-import { Vec2, Key } from 'kaboom';
+import './zoom';
+
+import type { Key, Vec2 } from 'kaboom';
 
 import { ifTalking } from '../content/talking';
-
 import { K } from './init';
-import './zoom';
 
 let getMoving = () => {};
 let isDown = false;
@@ -16,10 +16,10 @@ const controls = () => {
   const SPEED = 80;
 
   const allDirections = {
-    left: K.vec2(-1, 0),
-    up: K.vec2(0, -1),
-    right: K.vec2(1, 0),
     down: K.vec2(0, 1),
+    left: K.vec2(-1, 0),
+    right: K.vec2(1, 0),
+    up: K.vec2(0, -1),
   };
 
   const directionKeys = Object.keys(allDirections);
@@ -81,8 +81,7 @@ const touchStart = () => {
   if (!sound && getComputedStyle(title as Element).opacity === '1') {
     K.play('coin');
     sound = true;
-    (document.querySelector('#controls') as HTMLElement).style.pointerEvents =
-      'all';
+    document.querySelector('#controls')!.style.pointerEvents = 'all';
     if (blackScreen && title) {
       blackScreen.style.animation = 'fadeOut .4s linear 0s forwards';
       title.style.animation = 'fadeOut .2s linear 0s forwards';

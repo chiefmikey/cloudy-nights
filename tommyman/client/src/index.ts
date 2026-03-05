@@ -1,7 +1,6 @@
 import 'airbnb-browser-shims';
 import 'the-new-css-reset/css/reset.css';
 import './styles.css';
-import { tommyman } from './elements/tommyman';
 import './elements/body';
 import './controls/audio';
 import './controls/direction';
@@ -11,6 +10,8 @@ import './helpers/position';
 import './helpers/interval';
 import './helpers/print';
 import './helpers/random';
+
+import { tommyman } from './elements/tommyman';
 
 setTimeout(() => {
   if (tommyman) {

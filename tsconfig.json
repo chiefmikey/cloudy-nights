@@ -27,8 +27,9 @@
     }
   },
   "ts-node": {
+    "esm": true,
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "esnext"
     }
   },
   "exclude": [
