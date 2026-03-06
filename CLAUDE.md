@@ -23,7 +23,11 @@ docs/                     # HTML entry points + CNAME (deployed to client branch
 - `npm run dev` — Webpack dev mode with watch
 - `npm run prod` — Webpack production build
 - `npm run fix` — ESLint autofix
-- `npm run start` — Koa dev server on :3000
+- `npm run start` — Koa dev server (ts-node-esm)
+- `npm test` — Dev server via nodemon (no test suite)
+
+## Testing
+No automated test suite.
 
 ## Deployment
 The `build-prod.yml` workflow:
