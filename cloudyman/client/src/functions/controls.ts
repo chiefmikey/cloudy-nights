@@ -8,7 +8,7 @@ import { K } from './init';
 let getMoving = () => {};
 let isDown = false;
 let direction: string;
-let timer: NodeJS.Timer;
+let timer: NodeJS.Timeout;
 let sound = false;
 
 const controls = () => {
